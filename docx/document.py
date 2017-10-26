@@ -205,7 +205,7 @@ class Document(ElementProxy):
         self.create_caption(caption, par,  obj_type, bmark)
         return par
 
-    def add_picture(self, image_path_or_stream, width=None, height=None):
+    def add_picture(self, image_path_or_stream, width=None, height=None, style=None):
         """
         Return a new picture shape added in its own paragraph at the end of
         the document. The picture contains the image at
@@ -218,7 +218,10 @@ class Document(ElementProxy):
         in the image file, defaulting to 72 dpi if no value is specified, as
         is often the case.
         """
-        run = self.add_paragraph().add_run()
+        if style is not None:
+            run = self.add_paragraph(style=style).add_run()
+        else:
+            run = self.add_paragraph().add_run()
         return run.add_picture(image_path_or_stream, width, height)
 
     def add_section(self, start_type=WD_SECTION.NEW_PAGE):

@@ -401,7 +401,7 @@ class CT_Tc(BaseOxmlElement):
         if tcPr is not None:
             new_children.append(tcPr)
         self[:] = new_children
-
+        
     @property
     def grid_span(self):
         """

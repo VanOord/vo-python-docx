@@ -9,7 +9,7 @@ from ..simpletypes import ST_BrClear, ST_BrType
 from ..xmlchemy import (
     BaseOxmlElement, OptionalAttribute, ZeroOrMore, ZeroOrOne
 )
-
+from docx.oxml import OxmlElement
 
 class CT_Br(BaseOxmlElement):
     """
@@ -42,6 +42,17 @@ class CT_R(BaseOxmlElement):
         if len(text.strip()) < len(text):
             t.set(qn('xml:space'), 'preserve')
         return t
+
+    def add_bookmark_start(self, name='test_bookmark'):
+        bmrk = OxmlElement('w:bookmarkStart')
+        bmrk.set(qn('w:id'), '1')
+        bmrk.set(qn('w:name'), name)
+        return bmrk
+    
+    def add_bookmark_end(self):
+        bmrk = OxmlElement('w:bookmarkEnd')
+        bmrk.set(qn('w:id'), '1')
+        return bmrk
 
     def add_drawing(self, inline_or_anchor):
         """

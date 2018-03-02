@@ -197,6 +197,22 @@ class _Cell(BlockItemContainer):
         super(_Cell, self).__init__(tc, parent)
         self._tc = tc
 
+    def add_color(self, color_hex):
+        from docx.oxml import OxmlElement
+        from docx.oxml.ns import qn
+
+        
+        a = self._tc.get_or_add_tcPr()
+        #<w:shd w:val="clear" w:color="auto" w:fill="5D78CD" w:themeFill="text2" w:themeFillTint="99" />
+        color = OxmlElement('w:shd')
+        color.set(qn('w:val'), "clear")
+        color.set(qn('w:color'), "manual" )
+        color.set(qn('w:fill'), color_hex)
+        #color.set(qn('w:themeFill'), "text2")
+        color.set(qn('w:themeFillTint'), "99")
+        a.append(color)
+        return a
+    
     def add_paragraph(self, text='', style=None):
         """
         Return a paragraph newly added to the end of the content in this

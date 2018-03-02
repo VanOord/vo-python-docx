@@ -199,11 +199,12 @@ class Document(ElementProxy):
         bmrk_1.set(qn('w:id'), '1')
         par.append(bmrk_1)
         
-        run = paragraph.add_run()
         caption = OxmlElement('w:t')
         caption.set(qn('xml:space'), 'preserve')        
         caption.text = ' {:s}'.format(entry)
-        run._r.append(caption)  
+        run = paragraph.add_run(caption.text)
+        
+        #run._r.append(caption)  
         
     def add_caption(self, caption, bmark, obj_type='figure'):
         """

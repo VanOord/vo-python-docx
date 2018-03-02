@@ -80,6 +80,10 @@ class Run(Parented):
         t = self._r.add_t(text)
         return _Text(t)
 
+    def add_bookmark(self, name='test_bookmark'):
+        self._r.append(self._r.add_bookmark_start(name=name))
+        self._r.append(self._r.add_bookmark_end())
+        
     @property
     def bold(self):
         """

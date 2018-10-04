@@ -14,6 +14,8 @@ class CT_P(BaseOxmlElement):
     """
     pPr = ZeroOrOne('w:pPr')
     r = ZeroOrMore('w:r')
+    oMath = ZeroOrMore('m:oMath')
+    oMathPara = ZeroOrMore('m:oMathPara')
 
     def _insert_pPr(self, pPr):
         self.insert(0, pPr)

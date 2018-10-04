@@ -12,7 +12,7 @@ from ..enum.style import WD_STYLE_TYPE
 from .parfmt import ParagraphFormat
 from .run import Run
 from ..shared import Parented
-
+from .math import Equation
 
 class Paragraph(Parented):
     """
@@ -92,6 +92,12 @@ class Paragraph(Parented):
         """
         return [Run(r, self) for r in self._p.r_lst]
 
+    @property
+    def equations(self):
+        """
+        """
+        return [Equation(eq, self) for eq in self._p.oMathPara_lst]
+        
     @property
     def style(self):
         """

@@ -37,6 +37,7 @@ def register_element_cls(tag, cls):
     """
     nspfx, tagroot = tag.split(':')
     namespace = element_class_lookup.get_namespace(nsmap[nspfx])
+    
     namespace[tagroot] = cls
 
 
@@ -68,6 +69,9 @@ from .shared import CT_DecimalNumber, CT_OnOff, CT_String  # noqa
 register_element_cls("w:evenAndOddHeaders", CT_OnOff)
 register_element_cls("w:titlePg", CT_OnOff)
 
+from .math import CT_OMath, CT_OMathPara
+register_element_cls('m:oMath',  CT_OMath)
+register_element_cls('m:oMathPara',  CT_OMathPara)
 
 from .coreprops import CT_CoreProperties  # noqa
 register_element_cls('cp:coreProperties', CT_CoreProperties)
@@ -246,3 +250,7 @@ from .text.run import CT_Br, CT_R, CT_Text  # noqa
 register_element_cls('w:br', CT_Br)
 register_element_cls('w:r',  CT_R)
 register_element_cls('w:t',  CT_Text)
+
+
+
+

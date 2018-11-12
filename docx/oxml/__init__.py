@@ -74,6 +74,9 @@ register_element_cls('m:oMathPara',  CT_OMathPara)
 from .coreprops import CT_CoreProperties
 register_element_cls('cp:coreProperties', CT_CoreProperties)
 
+from .customxml import CT_CustomXML
+register_element_cls('vo:customContent', CT_CustomXML)
+
 from .document import CT_Body, CT_Document
 register_element_cls('w:body',     CT_Body)
 register_element_cls('w:document', CT_Document)

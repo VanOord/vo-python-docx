@@ -403,36 +403,6 @@ class Document(ElementProxy):
                     p._p = None
                     p._element = None
                     return True    
-#    def bookmark_picture(self, bookmark_name, picture):
-#        doc_element = self._part._element
-#        bookmarks_list = doc_element.findall('.//' + qn('wp:docPr'))
-#        caption_list = doc_element.findall('.//' + qn('w:fldSimple'))
-##        print(caption_list)
-#        for bookmark in bookmarks_list:
-#            name = bookmark.get(qn('wp:name'))
-##            print('bmark_id', bookmark.id)
-##            print('bmark_name', bookmark.name)
-#            print(bookmark.name, bookmark_name)
-#            if bookmark.name == bookmark_name:
-#                print(bookmark.name)
-#                par = bookmark.getparent()
-#                print(par)
-#                
-#                test = _Body(par, CT_P())
-#                #test.clear_content()
-#                
-#                run = test.add_paragraph().add_run()
-#                
-#                        
-#                run.add_picture(picture)
-#
-##                if not isinstance(par, CT_P):
-##                    return False
-##                else:
-#                print('Doe iets')
-#
-#                return True
-# 
               
     @property
     def core_properties(self):
@@ -442,6 +412,12 @@ class Document(ElementProxy):
         """
         return self._part.core_properties
 
+    @property
+    def content_control(self):
+        """
+        """
+        return self._part.content_control
+        
     @property
     def inline_shapes(self):
         """

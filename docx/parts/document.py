@@ -17,7 +17,7 @@ from ..shape import InlineShapes
 from ..shared import lazyproperty
 from .settings import SettingsPart
 from .styles import StylesPart
-
+from docx.opc.customxml import CustomXML
 
 class DocumentPart(XmlPart):
     """
@@ -83,6 +83,13 @@ class DocumentPart(XmlPart):
         """
         return InlineShapes(self._element.body, self)
 
+    def iter_custom_xml_parts(self):
+        """Generate all parts in document that contain customxml.
+        A customxml part contains coverpager properties, but also
+        custom-additional properties.
+        """
+        return self.iter_parts_related_by(RT.CUSTOM_XML_PROPS)
+        
     def new_pic_inline(self, image_descriptor, width, height):
         """
         Return a newly-created `w:inline` element containing the image
@@ -171,3 +178,27 @@ class DocumentPart(XmlPart):
             styles_part = StylesPart.default(self.package)
             self.relate_to(styles_part, RT.STYLES)
             return styles_part
+
+    @property
+    def content_control(self):
+        """
+        """
+        return self._custom_content_control_part
+
+    @property
+    def _custom_content_control_part(self):
+        """
+        only returns a docx.opc.customxml.CustomXML
+        """
+        try:
+            for part in self.iter_custom_xml_parts():
+                if type(part.custom_xml) == CustomXML:
+                    return part.custom_xml
+        except:
+            print('No Custom XML part found')
+            
+                    
+                
+                
+            
+    

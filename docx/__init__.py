@@ -10,7 +10,7 @@ __version__ = '0.8.10'
 from docx.opc.constants import CONTENT_TYPE as CT, RELATIONSHIP_TYPE as RT
 from docx.opc.part import PartFactory
 from docx.opc.parts.coreprops import CorePropertiesPart
-
+from docx.opc.parts.custom_xml import CustomXmlPart
 from docx.parts.document import DocumentPart
 from docx.parts.hdrftr import FooterPart, HeaderPart
 from docx.parts.image import ImagePart
@@ -27,6 +27,7 @@ def part_class_selector(content_type, reltype):
 
 PartFactory.part_class_selector = part_class_selector
 PartFactory.part_type_for[CT.OPC_CORE_PROPERTIES] = CorePropertiesPart
+PartFactory.part_type_for[CT.XML] = CustomXmlPart
 PartFactory.part_type_for[CT.WML_DOCUMENT_MAIN] = DocumentPart
 PartFactory.part_type_for[CT.WML_FOOTER] = FooterPart
 PartFactory.part_type_for[CT.WML_HEADER] = HeaderPart
@@ -37,6 +38,7 @@ PartFactory.part_type_for[CT.WML_STYLES] = StylesPart
 del (
     CT,
     CorePropertiesPart,
+    CustomXmlPart,
     DocumentPart,
     FooterPart,
     HeaderPart,

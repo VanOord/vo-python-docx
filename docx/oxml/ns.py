@@ -25,6 +25,7 @@ nsmap = {
             'Drawing'),
     'xml': ('http://www.w3.org/XML/1998/namespace'),
     'xsi': ('http://www.w3.org/2001/XMLSchema-instance'),
+    'vo': ('CustomContent'),
 }
 
 pfxmap = dict((value, key) for key, value in nsmap.items())

@@ -25,6 +25,11 @@ class Run(Parented):
         super(Run, self).__init__(parent)
         self._r = self._element = self.element = r
 
+    def add_field(self, field_name, properties):
+        fld = self._r.add_fldsimple()
+        fld.set_field(field_name, properties)
+        return fld
+
     def add_break(self, break_type=WD_BREAK.LINE):
         """
         Add a break element of *break_type* to this run. *break_type* can
@@ -81,9 +86,18 @@ class Run(Parented):
         return _Text(t)
 
     def add_bookmark(self, name='test_bookmark'):
-        self._r.append(self._r.add_bookmark_start(name=name))
-        self._r.append(self._r.add_bookmark_end())
-        
+        bmks = self._r.xpath('//w:bookmarkStart')
+        bmk = self._r._add_bookmarkStart()
+        bmk.id = len(bmks)
+        names = [bmk.name for bmk in bmks]
+        if name not in names:
+            bmk.name = name
+        return bmk
+
+    def add_bookmark_end(self, bmk):
+        bmk_end = self._r._add_bookmarkEnd()
+        bmk_end.id = bmk.id
+
     @property
     def bold(self):
         """

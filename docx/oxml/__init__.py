@@ -37,7 +37,7 @@ def register_element_cls(tag, cls):
     """
     nspfx, tagroot = tag.split(':')
     namespace = element_class_lookup.get_namespace(nsmap[nspfx])
-    
+
     namespace[tagroot] = cls
 
 
@@ -206,11 +206,14 @@ register_element_cls('w:tab',             CT_TabStop)
 register_element_cls('w:tabs',            CT_TabStops)
 register_element_cls('w:widowControl',    CT_OnOff)
 
-from .text.run import CT_Br, CT_R, CT_Text
+from .text.run import CT_Br, CT_R, CT_Text, CT_SimpleField, CT_FldChar
 register_element_cls('w:br', CT_Br)
 register_element_cls('w:r',  CT_R)
 register_element_cls('w:t',  CT_Text)
+register_element_cls('w:fldSimple',  CT_SimpleField)
+register_element_cls('w:fldChar',  CT_FldChar)
 
 
-
-
+from docx.oxml.bookmark import CT_Bookmark, CT_MarkupRange  # noqa
+register_element_cls('w:bookmarkEnd', CT_MarkupRange)
+register_element_cls('w:bookmarkStart', CT_Bookmark)

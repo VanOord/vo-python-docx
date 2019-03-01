@@ -5,11 +5,37 @@ Custom element classes related to text runs (CT_R).
 """
 
 from ..ns import qn
-from ..simpletypes import ST_BrClear, ST_BrType
+from ..simpletypes import ST_BrClear, ST_BrType, ST_OnOff, ST_String, ST_FldCharType
 from ..xmlchemy import (
-    BaseOxmlElement, OptionalAttribute, ZeroOrMore, ZeroOrOne
+    BaseOxmlElement, OptionalAttribute, ZeroOrMore, ZeroOrOne, RequiredAttribute
 )
 from docx.oxml import OxmlElement
+from docx.enum.fields import WD_FIELDCODE
+
+
+class CT_SimpleField(BaseOxmlElement):
+    """
+    `<w:fldSimple>` element, indicating a simple field character.
+    """
+    instr = RequiredAttribute("w:instr", ST_String)
+    fldLock = OptionalAttribute('w:fldLock', ST_OnOff)
+    dirty = OptionalAttribute('w:dirty', ST_OnOff)
+
+    def set_field(self, field_name, properties):
+        if getattr(WD_FIELDCODE, field_name):
+            self.instr = field_name + ' ' + properties
+
+class CT_FldChar(BaseOxmlElement):
+    """
+    `<w:fldChar>` element, indicating a simple field character.
+    """
+    fldCharType = RequiredAttribute("w:fldCharType", ST_FldCharType)
+    instrText = RequiredAttribute("w:instrText", ST_String)
+    fldLock = OptionalAttribute('w:fldLock', ST_OnOff)
+    dirty = OptionalAttribute('w:dirty', ST_OnOff)
+
+    def set_field(self, codes):
+        self.instrText = code
 
 class CT_Br(BaseOxmlElement):
     """
@@ -23,12 +49,16 @@ class CT_R(BaseOxmlElement):
     """
     ``<w:r>`` element, containing the properties and text for a run.
     """
+    bookmarkStart = ZeroOrMore("w:bookmarkStart")
+    bookmarkEnd = ZeroOrMore("w:bookmarkEnd")
     rPr = ZeroOrOne('w:rPr')
     t = ZeroOrMore('w:t')
     br = ZeroOrMore('w:br')
     cr = ZeroOrMore('w:cr')
     tab = ZeroOrMore('w:tab')
     drawing = ZeroOrMore('w:drawing')
+    fldsimple = ZeroOrMore('w:fldSimple')
+    fldChar = ZeroOrMore('w:fldChar')
 
     def _insert_rPr(self, rPr):
         self.insert(0, rPr)
@@ -42,17 +72,6 @@ class CT_R(BaseOxmlElement):
         if len(text.strip()) < len(text):
             t.set(qn('xml:space'), 'preserve')
         return t
-
-    def add_bookmark_start(self, name='test_bookmark'):
-        bmrk = OxmlElement('w:bookmarkStart')
-        bmrk.set(qn('w:id'), '1')
-        bmrk.set(qn('w:name'), name)
-        return bmrk
-    
-    def add_bookmark_end(self):
-        bmrk = OxmlElement('w:bookmarkEnd')
-        bmrk.set(qn('w:id'), '1')
-        return bmrk
 
     def add_drawing(self, inline_or_anchor):
         """

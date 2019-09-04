@@ -14,7 +14,7 @@ from docx.parts.styles import StylesPart
 from docx.shape import InlineShapes
 from docx.shared import lazyproperty
 from docx.oxml import CT_Inline
-
+from docx.opc.customxml import CustomXML
 
 class DocumentPart(BaseStoryPart):
     """Main document part of a WordprocessingML (WML) package, aka a .docx file.

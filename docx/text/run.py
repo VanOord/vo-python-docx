@@ -30,6 +30,11 @@ class Run(Parented):
         fld.set_field(field_name, properties)
         return fld
 
+    def add_hyperlink(self, bookmark_name):
+        hyp = self._r.add_hyperlink()
+        hyp.set_anchor(bookmark_name)
+        return hyp
+
     def add_break(self, break_type=WD_BREAK.LINE):
         """
         Add a break element of *break_type* to this run. *break_type* can

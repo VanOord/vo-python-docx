@@ -5,7 +5,6 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 from docx.blkcntnr import BlockItemContainer
-
 from docx.enum.section import WD_SECTION
 from docx.enum.text import WD_BREAK
 from docx.section import Section, Sections
@@ -111,6 +110,14 @@ class Document(ElementProxy):
         properties of this document.
         """
         return self._part.core_properties
+
+    @property
+    def content_control(self):
+        """
+        A |CustomXmlPart| object providing read/write access to the van Oord
+        custom properties of this document.
+        """
+        return self._part.content_control
 
     def end_bookmark(self, bookmark):
         """Return `bookmark` after closing it at end of this document."""

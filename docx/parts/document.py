@@ -9,6 +9,7 @@ from itertools import chain
 from docx.bookmark import Bookmarks
 from docx.document import Document
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
+from docx.opc.customxml import CustomXML
 from docx.oxml.shape import CT_Inline
 from docx.parts.hdrftr import FooterPart, HeaderPart
 from docx.parts.numbering import NumberingPart
@@ -44,6 +45,11 @@ class DocumentPart(BaseStoryPart):
     def bookmarks(self):
         """Singleton |Bookmarks| object for this docx package."""
         return Bookmarks(self)
+
+    @property
+    def content_control(self):
+        """ """
+        return self.package.custom_xml_part
 
     @property
     def core_properties(self):
@@ -111,6 +117,13 @@ class DocumentPart(BaseStoryPart):
                 {RT.COMMENTS, RT.ENDNOTES, RT.FOOTER, RT.FOOTNOTES, RT.HEADER}
             ),
         )
+
+    def iter_custom_xml_parts(self):
+        """Generate all parts in document that contain customxml.
+        A customxml part contains coverpager properties, but also
+        custom-additional properties.
+        """
+        return self.iter_parts_related_by(RT.CUSTOM_XML_PROPS)
 
     def new_pic_inline(self, image_descriptor, width, height):
         """

@@ -8,6 +8,7 @@ from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.opc.packuri import PACKAGE_URI, PackURI
 from docx.opc.part import PartFactory
 from docx.opc.parts.coreprops import CorePropertiesPart
+from docx.opc.parts.custom_xml import CustomXmlPart
 from docx.opc.pkgreader import PackageReader
 from docx.opc.pkgwriter import PackageWriter
 from docx.opc.rel import Relationships
@@ -41,11 +42,17 @@ class OpcPackage(object):
         """
         return self._core_properties_part.core_properties
 
+    @property
+    def custom_xml_part(self):
+        """"""
+        return self._custom_xml_part
+
     def iter_rels(self):
         """
         Generate exactly one reference to each relationship in the package by
         performing a depth-first traversal of the rels graph.
         """
+
         def walk_rels(source, visited=None):
             visited = [] if visited is None else visited
             for rel in source.rels.values():
@@ -68,6 +75,7 @@ class OpcPackage(object):
         Generate exactly one reference to each of the parts in the package by
         performing a depth-first traversal of the rels graph.
         """
+
         def walk_parts(source, visited=list()):
             for rel in source.rels.values():
                 if rel.is_external:
@@ -184,6 +192,19 @@ class OpcPackage(object):
             self.relate_to(core_properties_part, RT.CORE_PROPERTIES)
             return core_properties_part
 
+    @property
+    def _custom_xml_part(self):
+        """
+        |CorePropertiesPart| object related to this package. Creates
+        a default core properties part if one is not present (not common).
+        """
+        try:
+            return self.part_related_by(RT.CUSTOM_XML)
+        except KeyError:
+            custom_xml_part = CustomXmlPart.default(self)
+            self.relate_to(custom_xml_part, RT.CUSTOM_XML)
+            return custom_xml_part
+
 
 class Unmarshaller(object):
     """Hosts static methods for unmarshalling a package from a |PackageReader|."""
@@ -195,9 +216,7 @@ class Unmarshaller(object):
         contents of *pkg_reader*, delegating construction of each part to
         *part_factory*. Package relationships are added to *pkg*.
         """
-        parts = Unmarshaller._unmarshal_parts(
-            pkg_reader, package, part_factory
-        )
+        parts = Unmarshaller._unmarshal_parts(pkg_reader, package, part_factory)
         Unmarshaller._unmarshal_relationships(pkg_reader, package, parts)
         for part in parts.values():
             part.after_unmarshal()
@@ -225,7 +244,8 @@ class Unmarshaller(object):
         target part in *parts*.
         """
         for source_uri, srel in pkg_reader.iter_srels():
-            source = package if source_uri == '/' else parts[source_uri]
-            target = (srel.target_ref if srel.is_external
-                      else parts[srel.target_partname])
+            source = package if source_uri == "/" else parts[source_uri]
+            target = (
+                srel.target_ref if srel.is_external else parts[srel.target_partname]
+            )
             source.load_rel(srel.reltype, target, srel.rId, srel.is_external)

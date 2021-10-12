@@ -75,6 +75,10 @@ from docx.oxml.coreprops import CT_CoreProperties  # noqa
 
 register_element_cls("cp:coreProperties", CT_CoreProperties)
 
+from docx.oxml.customxml import CT_CustomXML
+
+register_element_cls("vo:customContent", CT_CustomXML)
+
 from docx.oxml.document import CT_Body, CT_Document  # noqa
 
 register_element_cls("w:body", CT_Body)

@@ -7,6 +7,7 @@ The |Table| object and related proxy classes.
 from __future__ import absolute_import, print_function, unicode_literals
 
 from docx.blkcntnr import BlockItemContainer
+from docx.borders import Borders, CellBorders
 from docx.enum.shading import WD_SHADING_PATTERN
 from docx.enum.style import WD_STYLE_TYPE
 from docx.oxml.simpletypes import ST_Merge
@@ -74,6 +75,11 @@ class Table(Parented):
     @autofit.setter
     def autofit(self, value):
         self._tblPr.autofit = value
+
+    @property
+    def borders(self):
+        """Return table level defined borders."""
+        return Borders(self._tblPr.borders)
 
     def cell(self, row_idx, col_idx):
         """
@@ -222,6 +228,12 @@ class _Cell(BlockItemContainer):
         table = super(_Cell, self).add_table(rows, cols, width)
         self.add_paragraph()
         return table
+
+    @property
+    def borders(self):
+        """Return cell level defined borders."""
+        tcPr = self._element.get_or_add_tcPr()
+        return CellBorders(tcPr.borders)
 
     def merge(self, other_cell):
         """

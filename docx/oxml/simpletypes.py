@@ -264,6 +264,24 @@ class ST_HpsMeasure(XsdUnsignedLong):
         return str(half_points)
 
 
+class ST_EighthPointMeasure(XsdUnsignedLong):
+    """
+    Half-point measure, e.g. 24.0 represents 3.0 points.
+    """
+
+    @classmethod
+    def convert_from_xml(cls, str_value):
+        if "m" in str_value or "n" in str_value or "p" in str_value:
+            return ST_UniversalMeasure.convert_from_xml(str_value)
+        return Pt(int(str_value) / 8.0)
+
+    @classmethod
+    def convert_to_xml(cls, value):
+        emu = Emu(value)
+        half_points = int(emu.pt * 8)
+        return str(half_points)
+
+
 class ST_Merge(XsdStringEnumeration):
     """
     Valid values for <w:xMerge val=""> attribute
@@ -284,6 +302,15 @@ class ST_OnOff(XsdBoolean):
                 "ff', got '%s'" % str_value
             )
         return str_value in ("1", "true", "on")
+
+
+class ST_PointMeasure(XsdUnsignedLong):
+    """
+    The `ST_PointMeasure` imposes the same restriction as the
+    `ST_UnsignedDecimalNumber` and is used in the context of table borders.
+    """
+
+    pass
 
 
 class ST_PositiveCoordinate(XsdLong):

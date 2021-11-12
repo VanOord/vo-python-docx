@@ -161,34 +161,49 @@ register_element_cls("w:uiPriority", CT_DecimalNumber)
 register_element_cls("w:unhideWhenUsed", CT_OnOff)
 
 from docx.oxml.table import (
+    CT_Border,
     CT_Height,
     CT_Row,
     CT_Tbl,
+    CT_TblBorders,
     CT_TblGrid,
     CT_TblGridCol,
     CT_TblLayoutType,
     CT_TblPr,
     CT_TblWidth,
     CT_Tc,
+    CT_TcBorders,
     CT_TcPr,
     CT_TrPr,
     CT_VerticalJc,
     CT_VMerge,
 )
 
+register_element_cls("w:bottom", CT_Border)
 register_element_cls("w:bidiVisual", CT_OnOff)
+register_element_cls("w:end", CT_Border)
 register_element_cls("w:gridCol", CT_TblGridCol)
 register_element_cls("w:gridSpan", CT_DecimalNumber)
+register_element_cls("w:insideH", CT_Border)
+register_element_cls("w:insideV", CT_Border)
+register_element_cls("w:left", CT_Border)
+register_element_cls("w:right", CT_Border)
 register_element_cls("w:tbl", CT_Tbl)
+register_element_cls("w:tblBorders", CT_TblBorders)
 register_element_cls("w:tblGrid", CT_TblGrid)
 register_element_cls("w:tblLayout", CT_TblLayoutType)
 register_element_cls("w:tblPr", CT_TblPr)
 register_element_cls("w:tblStyle", CT_String)
 register_element_cls("w:tc", CT_Tc)
+register_element_cls("w:tcBorders", CT_TcBorders)
 register_element_cls("w:tcPr", CT_TcPr)
 register_element_cls("w:tcW", CT_TblWidth)
+register_element_cls("w:top", CT_Border)
+register_element_cls("w:tl2br", CT_Border)
 register_element_cls("w:tr", CT_Row)
+register_element_cls("w:tr2bl", CT_Border)
 register_element_cls("w:trHeight", CT_Height)
+register_element_cls("w:start", CT_Border)
 register_element_cls("w:trPr", CT_TrPr)
 register_element_cls("w:vAlign", CT_VerticalJc)
 register_element_cls("w:vMerge", CT_VMerge)

@@ -2,19 +2,53 @@
 
 """Custom element classes for tables"""
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
-from ..enum.table import WD_CELL_VERTICAL_ALIGNMENT, WD_ROW_HEIGHT_RULE
-from ..exceptions import InvalidSpanError
-from ..shared import Emu, Twips
-from . import parse_xml
-from .ns import nsdecls, qn
-from .simpletypes import (ST_Merge, ST_TblLayoutType, ST_TblWidth,
-                          ST_TwipsMeasure, XsdInt)
-from .xmlchemy import (BaseOxmlElement, OneAndOnlyOne, OneOrMore,
-                       OptionalAttribute, RequiredAttribute, ZeroOrMore,
-                       ZeroOrOne)
+from docx.enum.dml import MSO_THEME_COLOR
+from docx.enum.table import (
+    WD_CELL_VERTICAL_ALIGNMENT,
+    WD_ROW_HEIGHT_RULE,
+    WD_TABLE_BORDER,
+)
+from docx.exceptions import InvalidSpanError
+from docx.oxml import parse_xml
+from docx.oxml.ns import nsdecls, qn
+from docx.oxml.simpletypes import (
+    ST_EighthPointMeasure,
+    ST_HexColor,
+    ST_Merge,
+    ST_OnOff,
+    ST_PointMeasure,
+    ST_TblLayoutType,
+    ST_TblWidth,
+    ST_TwipsMeasure,
+    ST_UcharHexNumber,
+    XsdInt,
+)
+from docx.oxml.xmlchemy import (
+    BaseOxmlElement,
+    OneAndOnlyOne,
+    OneOrMore,
+    OptionalAttribute,
+    RequiredAttribute,
+    ZeroOrMore,
+    ZeroOrOne,
+)
+from docx.shared import Emu, Twips
+
+
+class CT_Border(BaseOxmlElement):
+    """Used for the ``<w:tcBorders>`` and ``<w:tblBorders>`` to edit border."""
+
+    val = RequiredAttribute("w:val", WD_TABLE_BORDER)
+    color = OptionalAttribute("w:color", ST_HexColor)
+    frame = OptionalAttribute("w:frame", ST_OnOff)
+    themeColor = OptionalAttribute("w:themeColor", MSO_THEME_COLOR)
+    themeTint = OptionalAttribute("w:themeTint", ST_UcharHexNumber)
+    themeShade = OptionalAttribute("w:themeShade", ST_UcharHexNumber)
+    sz = OptionalAttribute("w:sz", ST_EighthPointMeasure)
+    space = OptionalAttribute("w:space", ST_PointMeasure)
+    shadow = OptionalAttribute("w:shadow", ST_OnOff)
 
 
 class CT_Height(BaseOxmlElement):
@@ -232,6 +266,109 @@ class CT_Tbl(BaseOxmlElement):
         return xml
 
 
+class CT_TblBorders(BaseOxmlElement):
+    """Used for the ``<w:tblBorders>`` elements."""
+
+    top = ZeroOrOne("w:top")
+    start = ZeroOrOne("w:start")
+    left = ZeroOrOne("w:left")
+    bottom = ZeroOrOne("w:bottom")
+    end = ZeroOrOne("w:end")
+    right = ZeroOrOne("w:right")
+    insideH = ZeroOrOne("w:insideH")
+    insideV = ZeroOrOne("w:insideV")
+
+    @property
+    def bottom_border(self):
+        bottom = self.bottom
+        if bottom is None:
+            return None
+        return bottom
+
+    @bottom_border.setter
+    def bottom_border(self, value):
+        self._remove_bottom()
+        if value is None:
+            return
+        bottom = self.get_or_add_bottom()
+        bottom.val = value
+
+    @property
+    def insideH_border(self):
+        insideH = self.insideH
+        if insideH is None:
+            return None
+        return insideH
+
+    @insideH_border.setter
+    def insideH_border(self, value):
+        self._remove_insideH()
+        if value is None:
+            return
+        insideH = self.get_or_add_insideH()
+        insideH.val = value
+
+    @property
+    def insideV_border(self):
+        insideV = self.insideV
+        if insideV is None:
+            return None
+        return insideV
+
+    @insideV_border.setter
+    def insideV_border(self, value):
+        self._remove_insideV()
+        if value is None:
+            return
+        insideV = self.get_or_add_insideV()
+        insideV.val = value
+
+    @property
+    def left_border(self):
+        left = self.left
+        if left is None:
+            return None
+        return left
+
+    @left_border.setter
+    def left_border(self, value):
+        self._remove_left()
+        if value is None:
+            return
+        left = self.get_or_add_left()
+        left.val = value
+
+    @property
+    def right_border(self):
+        right = self.right
+        if right is None:
+            return None
+        return right
+
+    @right_border.setter
+    def right_border(self, value):
+        self._remove_right()
+        if value is None:
+            return
+        right = self.get_or_add_right()
+        right.val = value
+
+    @property
+    def top_border(self):
+        top = self.top
+        if top is None:
+            return None
+        return top
+
+    @top_border.setter
+    def top_border(self, value):
+        self._remove_top()
+        if value is None:
+            return
+        top = self.get_or_add_top()
+        top.val = value
+
+
 class CT_TblGrid(BaseOxmlElement):
     """
     ``<w:tblGrid>`` element, child of ``<w:tbl>``, holds ``<w:gridCol>``
@@ -296,6 +433,7 @@ class CT_TblPr(BaseOxmlElement):
     tblStyle = ZeroOrOne("w:tblStyle", successors=_tag_seq[1:])
     bidiVisual = ZeroOrOne("w:bidiVisual", successors=_tag_seq[4:])
     jc = ZeroOrOne("w:jc", successors=_tag_seq[8:])
+    tblBorders = ZeroOrOne("w:tblBorders", successors=_tag_seq[11:])
     tblLayout = ZeroOrOne("w:tblLayout", successors=_tag_seq[13:])
     del _tag_seq
 
@@ -334,6 +472,11 @@ class CT_TblPr(BaseOxmlElement):
     def autofit(self, value):
         tblLayout = self.get_or_add_tblLayout()
         tblLayout.type = "autofit" if value else "fixed"
+
+    @property
+    def borders(self):
+        """Return tblBorders element if it exists else create it."""
+        return self.get_or_add_tblBorders()
 
     @property
     def style(self):
@@ -788,6 +931,43 @@ class CT_Tc(BaseOxmlElement):
         return self._tbl.tr_lst.index(self._tr)
 
 
+class CT_TcBorders(CT_TblBorders):
+    """``<w:tcBorders>`` element."""
+
+    tl2br = ZeroOrOne("w:tl2br")
+    tr2bl = ZeroOrOne("w:tr2bl")
+
+    @property
+    def top_left_bottom_right(self):
+        tl2br = self.tl2br
+        if tl2br is None:
+            return None
+        return tl2br
+
+    @top_left_bottom_right.setter
+    def top_left_bottom_right(self, value):
+        self._remove_tl2br()
+        if value is None:
+            return
+        tl2br = self.get_or_add_tl2br()
+        tl2br.val = value
+
+    @property
+    def top_right_bottom_left(self):
+        tr2bl = self.tr2bl
+        if tr2bl is None:
+            return None
+        return tr2bl
+
+    @top_right_bottom_left.setter
+    def top_right_bottom_left(self, value):
+        self._remove_tr2bl()
+        if value is None:
+            return
+        tr2bl = self.get_or_add_tr2bl()
+        tr2bl.val = value
+
+
 class CT_TcPr(BaseOxmlElement):
     """
     ``<w:tcPr>`` element, defining table cell properties
@@ -816,9 +996,15 @@ class CT_TcPr(BaseOxmlElement):
     tcW = ZeroOrOne("w:tcW", successors=_tag_seq[2:])
     gridSpan = ZeroOrOne("w:gridSpan", successors=_tag_seq[3:])
     vMerge = ZeroOrOne("w:vMerge", successors=_tag_seq[5:])
+    tcBorders = ZeroOrOne("w:tcBorders", successors=_tag_seq[6:])
     shd = ZeroOrOne("w:shd", successors=_tag_seq[7:])
     vAlign = ZeroOrOne("w:vAlign", successors=_tag_seq[12:])
     del _tag_seq
+
+    @property
+    def borders(self):
+        """Return tcBorders element or create it."""
+        return self.get_or_add_tcBorders()
 
     @property
     def grid_span(self):

@@ -2,12 +2,13 @@
 
 from docx.api import Document  # noqa
 
-__version__ = "1.0.0"
+__version__ = "1.2.0"
 
 
 # register custom Part classes with opc package reader
 
-from docx.opc.constants import CONTENT_TYPE as CT, RELATIONSHIP_TYPE as RT
+from docx.opc.constants import CONTENT_TYPE as CT
+from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.opc.part import PartFactory
 from docx.opc.parts.coreprops import CorePropertiesPart
 from docx.opc.parts.custom_xml import CustomXmlPart

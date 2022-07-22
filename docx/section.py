@@ -6,7 +6,7 @@ The |Section| object and related proxy classes.
 
 from __future__ import absolute_import, print_function, unicode_literals
 
-from collections import Sequence
+from collections.abc import Sequence
 
 
 class Sections(Sequence):
@@ -14,6 +14,7 @@ class Sections(Sequence):
     Sequence of |Section| objects corresponding to the sections in the
     document. Supports ``len()``, iteration, and indexed access.
     """
+
     def __init__(self, document_elm):
         super(Sections, self).__init__()
         self._document_elm = document_elm
@@ -37,6 +38,7 @@ class Section(object):
     """
     Document section, providing access to section and page setup settings.
     """
+
     def __init__(self, sectPr):
         super(Section, self).__init__()
         self._sectPr = sectPr

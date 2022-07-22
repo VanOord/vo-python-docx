@@ -4,9 +4,7 @@
 Settings object, providing access to document-level settings.
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from .shared import ElementProxy
 

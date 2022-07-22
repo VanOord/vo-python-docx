@@ -4,9 +4,7 @@
 Core properties part, corresponds to ``/docProps/core.xml`` part in package.
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from datetime import datetime
 
@@ -18,9 +16,8 @@ from ..part import XmlPart
 
 
 class CustomXmlPart(XmlPart):
-    """
+    """ """
 
-    """
     @property
     def custom_xml(self):
         """
@@ -30,13 +27,11 @@ class CustomXmlPart(XmlPart):
         if type(self._element) == CT_CustomXML:
             return CustomXML(self.element)
         else:
-            return CustomXmlBase(self.element)     
+            return CustomXmlBase(self.element)
 
     @classmethod
     def _new(cls, package):
-        partname = PackURI('/customXml/item2.xml')
+        partname = PackURI("/customXml/item2.xml")
         content_type = CT.XML
         custom_Xml = CT_CustomXML.new()
-        return CustomXmlPart(
-            partname, content_type, custom_Xml, package
-        )
+        return CustomXmlPart(partname, content_type, custom_Xml, package)

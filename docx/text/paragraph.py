@@ -4,9 +4,7 @@
 Paragraph-related proxy types.
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from ..enum.style import WD_STYLE_TYPE
 from .parfmt import ParagraphFormat
@@ -14,10 +12,12 @@ from .run import Run
 from ..shared import Parented
 from .math import Equation
 
+
 class Paragraph(Parented):
     """
     Proxy object wrapping ``<w:p>`` element.
     """
+
     def __init__(self, p, parent):
         super(Paragraph, self).__init__(parent)
         self._p = self._element = p
@@ -94,10 +94,9 @@ class Paragraph(Parented):
 
     @property
     def equations(self):
-        """
-        """
+        """ """
         return [Equation(eq, self) for eq in self._p.oMathPara_lst]
-        
+
     @property
     def style(self):
         """
@@ -113,9 +112,7 @@ class Paragraph(Parented):
 
     @style.setter
     def style(self, style_or_name):
-        style_id = self.part.get_style_id(
-            style_or_name, WD_STYLE_TYPE.PARAGRAPH
-        )
+        style_id = self.part.get_style_id(style_or_name, WD_STYLE_TYPE.PARAGRAPH)
         self._p.style = style_id
 
     @property
@@ -132,7 +129,7 @@ class Paragraph(Parented):
         Paragraph-level formatting, such as style, is preserved. All
         run-level formatting, such as bold or italic, is removed.
         """
-        text = ''
+        text = ""
         for run in self.runs:
             text += run.text
         return text

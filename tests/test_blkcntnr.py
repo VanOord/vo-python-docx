@@ -19,11 +19,8 @@ from .unitutil.mock import call, instance_mock, method_mock
 
 
 class DescribeBlockItemContainer(object):
-
     def it_can_add_a_paragraph(self, add_paragraph_fixture):
-        blkcntnr, text, style, paragraph_, add_run_calls = (
-            add_paragraph_fixture
-        )
+        blkcntnr, text, style, paragraph_, add_run_calls = add_paragraph_fixture
         new_paragraph = blkcntnr.add_paragraph(text, style)
 
         blkcntnr._add_paragraph.assert_called_once_with()
@@ -38,8 +35,7 @@ class DescribeBlockItemContainer(object):
         assert table._element.xml == expected_xml
         assert table._parent is blkcntnr
 
-    def it_provides_access_to_the_paragraphs_it_contains(
-            self, paragraphs_fixture):
+    def it_provides_access_to_the_paragraphs_it_contains(self, paragraphs_fixture):
         # test len(), iterable, and indexed access
         blkcntnr, expected_count = paragraphs_fixture
         paragraphs = blkcntnr.paragraphs
@@ -72,14 +68,15 @@ class DescribeBlockItemContainer(object):
 
     # fixtures -------------------------------------------------------
 
-    @pytest.fixture(params=[
-        ('',    None),
-        ('Foo', None),
-        ('',    'Bar'),
-        ('Foo', 'Bar'),
-    ])
-    def add_paragraph_fixture(self, request, _add_paragraph_, paragraph_,
-                              add_run_):
+    @pytest.fixture(
+        params=[
+            ("", None),
+            ("Foo", None),
+            ("", "Bar"),
+            ("Foo", "Bar"),
+        ]
+    )
+    def add_paragraph_fixture(self, request, _add_paragraph_, paragraph_, add_run_):
         blkcntnr = BlockItemContainer(None, None)
         text, style = request.param
         _add_paragraph_.return_value = paragraph_
@@ -89,37 +86,41 @@ class DescribeBlockItemContainer(object):
 
     @pytest.fixture
     def _add_paragraph_fixture(self, request):
-        blkcntnr_cxml, after_cxml = 'w:body', 'w:body/w:p'
+        blkcntnr_cxml, after_cxml = "w:body", "w:body/w:p"
         blkcntnr = BlockItemContainer(element(blkcntnr_cxml), None)
         expected_xml = xml(after_cxml)
         return blkcntnr, expected_xml
 
     @pytest.fixture
     def add_table_fixture(self):
-        blkcntnr = BlockItemContainer(element('w:body'), None)
+        blkcntnr = BlockItemContainer(element("w:body"), None)
         rows, cols, width = 2, 2, Inches(2)
-        expected_xml = snippet_seq('new-tbl')[0]
+        expected_xml = snippet_seq("new-tbl")[0]
         return blkcntnr, rows, cols, width, expected_xml
 
-    @pytest.fixture(params=[
-        ('w:body',                 0),
-        ('w:body/w:p',             1),
-        ('w:body/(w:p,w:p)',       2),
-        ('w:body/(w:p,w:tbl)',     1),
-        ('w:body/(w:p,w:tbl,w:p)', 2),
-    ])
+    @pytest.fixture(
+        params=[
+            ("w:body", 0),
+            ("w:body/w:p", 1),
+            ("w:body/(w:p,w:p)", 2),
+            ("w:body/(w:p,w:tbl)", 1),
+            ("w:body/(w:p,w:tbl,w:p)", 2),
+        ]
+    )
     def paragraphs_fixture(self, request):
         blkcntnr_cxml, expected_count = request.param
         blkcntnr = BlockItemContainer(element(blkcntnr_cxml), None)
         return blkcntnr, expected_count
 
-    @pytest.fixture(params=[
-        ('w:body',                   0),
-        ('w:body/w:tbl',             1),
-        ('w:body/(w:tbl,w:tbl)',     2),
-        ('w:body/(w:p,w:tbl)',       1),
-        ('w:body/(w:tbl,w:tbl,w:p)', 2),
-    ])
+    @pytest.fixture(
+        params=[
+            ("w:body", 0),
+            ("w:body/w:tbl", 1),
+            ("w:body/(w:tbl,w:tbl)", 2),
+            ("w:body/(w:p,w:tbl)", 1),
+            ("w:body/(w:tbl,w:tbl,w:p)", 2),
+        ]
+    )
     def tables_fixture(self, request):
         blkcntnr_cxml, expected_count = request.param
         blkcntnr = BlockItemContainer(element(blkcntnr_cxml), None)
@@ -129,11 +130,11 @@ class DescribeBlockItemContainer(object):
 
     @pytest.fixture
     def _add_paragraph_(self, request):
-        return method_mock(request, BlockItemContainer, '_add_paragraph')
+        return method_mock(request, BlockItemContainer, "_add_paragraph")
 
     @pytest.fixture
     def add_run_(self, request):
-        return method_mock(request, Paragraph, 'add_run')
+        return method_mock(request, Paragraph, "add_run")
 
     @pytest.fixture
     def paragraph_(self, request):

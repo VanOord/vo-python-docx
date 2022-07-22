@@ -18,9 +18,8 @@ from .unitutil.mock import class_mock, instance_mock, method_mock
 
 
 class DescribePackage(object):
-
     def it_gathers_package_image_parts_after_unmarshalling(self):
-        package = Package.open(docx_path('having-images'))
+        package = Package.open(docx_path("having-images"))
         image_parts = package.image_parts
         assert len(image_parts) == 3
         for image_part in image_parts:
@@ -28,30 +27,29 @@ class DescribePackage(object):
 
 
 class DescribeImageParts(object):
-
     def it_can_get_a_matching_image_part(self, get_image_part_fixture):
         image_parts, image_descriptor, image_part_ = get_image_part_fixture
         image_part = image_parts.get_or_add_image_part(image_descriptor)
         assert image_part is image_part_
 
     def it_can_add_a_new_image_part(self, add_image_part_fixture):
-        image_parts, image_descriptor, image_, image_part_ = (
-            add_image_part_fixture
-        )
+        image_parts, image_descriptor, image_, image_part_ = add_image_part_fixture
         image_part = image_parts.get_or_add_image_part(image_descriptor)
         image_parts._add_image_part.assert_called_once_with(image_)
         assert image_part is image_part_
 
-    def it_knows_the_next_available_image_partname(
-            self, next_partname_fixture):
+    def it_knows_the_next_available_image_partname(self, next_partname_fixture):
         image_parts, ext, expected_partname = next_partname_fixture
         assert image_parts._next_image_partname(ext) == expected_partname
 
-    def it_can_really_add_a_new_image_part(
-            self, really_add_image_part_fixture):
-        image_parts, image_, ImagePart_, partname_, image_part_ = (
-            really_add_image_part_fixture
-        )
+    def it_can_really_add_a_new_image_part(self, really_add_image_part_fixture):
+        (
+            image_parts,
+            image_,
+            ImagePart_,
+            partname_,
+            image_part_,
+        ) = really_add_image_part_fixture
         image_part = image_parts._add_image_part(image_)
         ImagePart_.from_image.assert_called_once_with(image_, partname_)
         assert image_part in image_parts
@@ -62,14 +60,18 @@ class DescribeImageParts(object):
     @pytest.fixture
     def _add_image_part_(self, request, new_image_part_):
         return method_mock(
-            request, ImageParts, '_add_image_part',
-            return_value=new_image_part_
+            request, ImageParts, "_add_image_part", return_value=new_image_part_
         )
 
     @pytest.fixture
     def add_image_part_fixture(
-            self, Image_, _add_image_part_, image_descriptor_, image_,
-            new_image_part_,):
+        self,
+        Image_,
+        _add_image_part_,
+        image_descriptor_,
+        image_,
+        new_image_part_,
+    ):
         image_parts = ImageParts()
         return image_parts, image_descriptor_, image_, new_image_part_
 
@@ -81,7 +83,7 @@ class DescribeImageParts(object):
 
     @pytest.fixture
     def Image_(self, request, image_):
-        Image_ = class_mock(request, 'docx.package.Image')
+        Image_ = class_mock(request, "docx.package.Image")
         Image_.from_file.return_value = image_
         return Image_
 
@@ -97,7 +99,7 @@ class DescribeImageParts(object):
 
     @pytest.fixture
     def ImagePart_(self, request, image_part_):
-        ImagePart_ = class_mock(request, 'docx.package.ImagePart')
+        ImagePart_ = class_mock(request, "docx.package.ImagePart")
         ImagePart_.from_image.return_value = image_part_
         return ImagePart_
 
@@ -112,7 +114,7 @@ class DescribeImageParts(object):
         return instance_mock(request, ImagePart, partname=partname)
 
     def _image_partname(self, n):
-        return PackURI('/word/media/image%d.png' % n)
+        return PackURI("/word/media/image%d.png" % n)
 
     @pytest.fixture
     def new_image_part_(self, request):
@@ -120,7 +122,7 @@ class DescribeImageParts(object):
 
     @pytest.fixture
     def _next_image_partname_(self, request):
-        return method_mock(request, ImageParts, '_next_image_partname')
+        return method_mock(request, ImageParts, "_next_image_partname")
 
     @pytest.fixture(params=[((2, 3), 1), ((1, 3), 2), ((1, 2), 3)])
     def next_partname_fixture(self, request):
@@ -129,10 +131,8 @@ class DescribeImageParts(object):
         for n in existing_partname_numbers:
             image_part_ = self._image_part_with_partname_(request, n)
             image_parts.append(image_part_)
-        ext = 'png'
-        expected_image_partname = self._image_partname(
-            expected_partname_number
-        )
+        ext = "png"
+        expected_image_partname = self._image_partname(expected_partname_number)
         return image_parts, ext, expected_image_partname
 
     @pytest.fixture
@@ -141,12 +141,12 @@ class DescribeImageParts(object):
 
     @pytest.fixture
     def really_add_image_part_fixture(
-            self, _next_image_partname_, partname_, image_, ImagePart_,
-            image_part_):
+        self, _next_image_partname_, partname_, image_, ImagePart_, image_part_
+    ):
         image_parts = ImageParts()
         _next_image_partname_.return_value = partname_
         return image_parts, image_, ImagePart_, partname_, image_part_
 
     @pytest.fixture
     def sha1(self):
-        return 'F008AH'
+        return "F008AH"

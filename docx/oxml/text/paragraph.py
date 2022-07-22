@@ -12,10 +12,11 @@ class CT_P(BaseOxmlElement):
     """
     ``<w:p>`` element, containing the properties and text for a paragraph.
     """
-    pPr = ZeroOrOne('w:pPr')
-    r = ZeroOrMore('w:r')
-    oMath = ZeroOrMore('m:oMath')
-    oMathPara = ZeroOrMore('m:oMathPara')
+
+    pPr = ZeroOrOne("w:pPr")
+    r = ZeroOrMore("w:r")
+    oMath = ZeroOrMore("m:oMath")
+    oMathPara = ZeroOrMore("m:oMathPara")
 
     def _insert_pPr(self, pPr):
         self.insert(0, pPr)
@@ -25,7 +26,7 @@ class CT_P(BaseOxmlElement):
         """
         Return a new ``<w:p>`` element inserted directly prior to this one.
         """
-        new_p = OxmlElement('w:p')
+        new_p = OxmlElement("w:p")
         self.addprevious(new_p)
         return new_p
 
@@ -50,7 +51,7 @@ class CT_P(BaseOxmlElement):
         Remove all child elements, except the ``<w:pPr>`` element if present.
         """
         for child in self[:]:
-            if child.tag == qn('w:pPr'):
+            if child.tag == qn("w:pPr"):
                 continue
             self.remove(child)
 

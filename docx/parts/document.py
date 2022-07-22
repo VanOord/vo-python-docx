@@ -4,9 +4,7 @@
 |DocumentPart| and closely related objects
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from ..document import Document
 from .numbering import NumberingPart
@@ -19,6 +17,7 @@ from .settings import SettingsPart
 from .styles import StylesPart
 from docx.opc.customxml import CustomXML
 
+
 class DocumentPart(XmlPart):
     """
     Main document part of a WordprocessingML (WML) package, aka a .docx file.
@@ -28,6 +27,7 @@ class DocumentPart(XmlPart):
     inherited by many content objects provides access to this part object for
     that purpose.
     """
+
     @property
     def core_properties(self):
         """
@@ -51,9 +51,7 @@ class DocumentPart(XmlPart):
         *rId* is the key for the relationship between this document part and
         the image part, reused if already present, newly created if not.
         """
-        image_part = self._package.image_parts.get_or_add_image_part(
-            image_descriptor
-        )
+        image_part = self._package.image_parts.get_or_add_image_part(image_descriptor)
         rId = self.relate_to(image_part, RT.IMAGE)
         return rId, image_part.image
 
@@ -89,7 +87,7 @@ class DocumentPart(XmlPart):
         custom-additional properties.
         """
         return self.iter_parts_related_by(RT.CUSTOM_XML_PROPS)
-        
+
     def new_pic_inline(self, image_descriptor, width, height):
         """
         Return a newly-created `w:inline` element containing the image
@@ -109,7 +107,7 @@ class DocumentPart(XmlPart):
         existing id sequence are not filled. The id attribute value is unique
         in the document, without regard to the element type it appears on.
         """
-        id_str_lst = self._element.xpath('//@id')
+        id_str_lst = self._element.xpath("//@id")
         used_ids = [int(id_str) for id_str in id_str_lst if id_str.isdigit()]
         if not used_ids:
             return 1
@@ -181,8 +179,7 @@ class DocumentPart(XmlPart):
 
     @property
     def content_control(self):
-        """
-        """
+        """ """
         return self._custom_content_control_part
 
     @property
@@ -195,10 +192,4 @@ class DocumentPart(XmlPart):
                 if type(part.custom_xml) == CustomXML:
                     return part.custom_xml
         except:
-            print('No Custom XML part found')
-            
-                    
-                
-                
-            
-    
+            print("No Custom XML part found")

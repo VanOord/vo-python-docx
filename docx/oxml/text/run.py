@@ -50,12 +50,11 @@ class CT_Hyperlink(BaseOxmlElement):
 
     anchor = RequiredAttribute("w:anchor", ST_String)
 
-
     def set_anchor(self, bookmark):
         self.anchor = bookmark
 
     def set_hyperlink_text(self, text):
-        new_r = OxmlElement('w:r')
+        new_r = OxmlElement("w:r")
         new_r.style = "Hyperlink"
         new_r.text = text
         self.insert(0, new_r)

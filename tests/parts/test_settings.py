@@ -4,9 +4,7 @@
 Test suite for the docx.parts.settings module
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import pytest
 
@@ -22,7 +20,6 @@ from ..unitutil.mock import class_mock, instance_mock, method_mock
 
 
 class DescribeSettingsPart(object):
-
     def it_is_used_by_loader_to_construct_settings_part(self, load_fixture):
         partname, content_type, blob, package_, settings_part_ = load_fixture
         part = PartFactory(partname, content_type, None, blob, package_)
@@ -41,7 +38,7 @@ class DescribeSettingsPart(object):
         package = OpcPackage()
         settings_part = SettingsPart.default(package)
         assert isinstance(settings_part, SettingsPart)
-        assert settings_part.partname == '/word/settings.xml'
+        assert settings_part.partname == "/word/settings.xml"
         assert settings_part.content_type == CT.WML_SETTINGS
         assert settings_part.package is package
         assert len(settings_part.element) == 6
@@ -50,14 +47,14 @@ class DescribeSettingsPart(object):
 
     @pytest.fixture
     def load_fixture(self, load_, package_, settings_part_):
-        partname, blob = 'partname', 'blob'
+        partname, blob = "partname", "blob"
         content_type = CT.WML_SETTINGS
         load_.return_value = settings_part_
         return partname, content_type, blob, package_, settings_part_
 
     @pytest.fixture
     def settings_fixture(self, Settings_, settings_):
-        settings_elm = element('w:settings')
+        settings_elm = element("w:settings")
         settings_part = SettingsPart(None, None, settings_elm, None)
         return settings_part, Settings_, settings_
 
@@ -65,7 +62,7 @@ class DescribeSettingsPart(object):
 
     @pytest.fixture
     def load_(self, request):
-        return method_mock(request, SettingsPart, 'load')
+        return method_mock(request, SettingsPart, "load")
 
     @pytest.fixture
     def package_(self, request):
@@ -74,7 +71,7 @@ class DescribeSettingsPart(object):
     @pytest.fixture
     def Settings_(self, request, settings_):
         return class_mock(
-            request, 'docx.parts.settings.Settings', return_value=settings_
+            request, "docx.parts.settings.Settings", return_value=settings_
         )
 
     @pytest.fixture

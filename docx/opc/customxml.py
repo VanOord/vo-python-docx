@@ -5,33 +5,35 @@ The :mod:`pptx.packaging` module coheres around the concerns of reading and
 writing presentations to and from a .pptx file.
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
+
 
 class CustomXmlBase(object):
     """
     Corresponds to part named ``/CustomXml/item2.xml``, containing the core
     document properties for this document package.
     """
+
     def __init__(self, element):
         self._element = element
-        
+
+
 class CustomXML(object):
     """
-    Corresponds to part named ``/CustomXml/item2.xml``, containing the 
+    Corresponds to part named ``/CustomXml/item2.xml``, containing the
     custom content control elements for this document package.
     """
+
     def __init__(self, element):
         self._element = element
-    
+
     @property
     def address(self):
         return self._element.address_text
 
     @address.setter
     def address(self, value):
-        self._element.address_text = value  
+        self._element.address_text = value
 
     @property
     def api_version(self):
@@ -39,7 +41,7 @@ class CustomXML(object):
 
     @api_version.setter
     def api_version(self, value):
-        self._element.apiversion_text = value  
+        self._element.apiversion_text = value
 
     @property
     def approved_by(self):
@@ -47,7 +49,7 @@ class CustomXML(object):
 
     @approved_by.setter
     def approved_by(self, value):
-        self._element.approvedby_text = value  
+        self._element.approvedby_text = value
 
     @property
     def authorization(self):
@@ -55,7 +57,7 @@ class CustomXML(object):
 
     @authorization.setter
     def authorization(self, value):
-        self._element.authorization_text = value  
+        self._element.authorization_text = value
 
     @property
     def checked_by(self):
@@ -63,7 +65,7 @@ class CustomXML(object):
 
     @checked_by.setter
     def checked_by(self, value):
-        self._element.checkedby_text = value  
+        self._element.checkedby_text = value
 
     @property
     def client_name(self):
@@ -71,7 +73,7 @@ class CustomXML(object):
 
     @client_name.setter
     def client_name(self, value):
-        self._element.clientname_text = value  
+        self._element.clientname_text = value
 
     @property
     def company(self):
@@ -79,7 +81,7 @@ class CustomXML(object):
 
     @company.setter
     def company(self, value):
-        self._element.company_text = value  
+        self._element.company_text = value
 
     @property
     def date(self):
@@ -87,7 +89,7 @@ class CustomXML(object):
 
     @date.setter
     def date(self, value):
-        self._element.date_text = value  
+        self._element.date_text = value
 
     @property
     def department(self):
@@ -95,7 +97,7 @@ class CustomXML(object):
 
     @department.setter
     def department(self, value):
-        self._element.department_text = value  
+        self._element.department_text = value
 
     @property
     def document_number(self):
@@ -103,7 +105,7 @@ class CustomXML(object):
 
     @document_number.setter
     def document_number(self, value):
-        self._element.documentnumber_text = value  
+        self._element.documentnumber_text = value
 
     @property
     def document_type(self):
@@ -111,7 +113,7 @@ class CustomXML(object):
 
     @document_type.setter
     def document_type(self, value):
-        self._element.documenttype_text = value  
+        self._element.documenttype_text = value
 
     @property
     def email(self):
@@ -119,7 +121,7 @@ class CustomXML(object):
 
     @email.setter
     def email(self, value):
-        self._element.email_text = value  
+        self._element.email_text = value
 
     @property
     def function(self):
@@ -127,7 +129,7 @@ class CustomXML(object):
 
     @function.setter
     def function(self, value):
-        self._element.function_text = value  
+        self._element.function_text = value
 
     @property
     def function_excerpt(self):
@@ -135,7 +137,7 @@ class CustomXML(object):
 
     @function_excerpt.setter
     def function_excerpt(self, value):
-        self._element.functionexcerpt_text = value  
+        self._element.functionexcerpt_text = value
 
     @property
     def location(self):
@@ -143,7 +145,7 @@ class CustomXML(object):
 
     @location.setter
     def location(self, value):
-        self._element.location_text = value  
+        self._element.location_text = value
 
     @property
     def name(self):
@@ -151,7 +153,7 @@ class CustomXML(object):
 
     @name.setter
     def name(self, value):
-        self._element.name_text = value  
+        self._element.name_text = value
 
     @property
     def prepared_by(self):
@@ -159,7 +161,7 @@ class CustomXML(object):
 
     @prepared_by.setter
     def prepared_by(self, value):
-        self._element.preparedby_text = value  
+        self._element.preparedby_text = value
 
     @property
     def project_director(self):
@@ -167,7 +169,7 @@ class CustomXML(object):
 
     @project_director.setter
     def project_director(self, value):
-        self._element.projectdirector_text = value  
+        self._element.projectdirector_text = value
 
     @property
     def project_name(self):
@@ -175,7 +177,7 @@ class CustomXML(object):
 
     @project_name.setter
     def project_name(self, value):
-        self._element.projectname_text = value  
+        self._element.projectname_text = value
 
     @property
     def project_title(self):
@@ -183,7 +185,7 @@ class CustomXML(object):
 
     @project_title.setter
     def project_title(self, value):
-        self._element.projecttitle_text = value  
+        self._element.projecttitle_text = value
 
     @property
     def project_code(self):
@@ -191,7 +193,7 @@ class CustomXML(object):
 
     @project_code.setter
     def project_code(self, value):
-        self._element.projectcode_text = value  
+        self._element.projectcode_text = value
 
     @property
     def recipient(self):
@@ -199,7 +201,7 @@ class CustomXML(object):
 
     @recipient.setter
     def recipient(self, value):
-        self._element.recipient_text = value  
+        self._element.recipient_text = value
 
     @property
     def reference(self):
@@ -207,7 +209,7 @@ class CustomXML(object):
 
     @reference.setter
     def reference(self, value):
-        self._element.reference_text = value  
+        self._element.reference_text = value
 
     @property
     def report_date(self):
@@ -215,7 +217,7 @@ class CustomXML(object):
 
     @report_date.setter
     def report_date(self, value):
-        self._element.reportdate_text = value  
+        self._element.reportdate_text = value
 
     @property
     def report_number(self):
@@ -223,7 +225,7 @@ class CustomXML(object):
 
     @report_number.setter
     def report_number(self, value):
-        self._element.reportnumber_text = value  
+        self._element.reportnumber_text = value
 
     @property
     def revision(self):
@@ -231,7 +233,7 @@ class CustomXML(object):
 
     @revision.setter
     def revision(self, value):
-        self._element.revision_text = value  
+        self._element.revision_text = value
 
     @property
     def surname(self):
@@ -239,7 +241,7 @@ class CustomXML(object):
 
     @surname.setter
     def surname(self, value):
-        self._element.surname_text = value  
+        self._element.surname_text = value
 
     @property
     def telephone(self):
@@ -247,7 +249,7 @@ class CustomXML(object):
 
     @telephone.setter
     def telephone(self, value):
-        self._element.telephone_text = value  
+        self._element.telephone_text = value
 
     @property
     def your_reference(self):
@@ -255,4 +257,4 @@ class CustomXML(object):
 
     @your_reference.setter
     def your_reference(self, value):
-        self._element.yourreference_text = value  
+        self._element.yourreference_text = value

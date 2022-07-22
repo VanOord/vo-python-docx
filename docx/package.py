@@ -18,6 +18,7 @@ class Package(OpcPackage):
     """
     Customizations specific to a WordprocessingML package.
     """
+
     def after_unmarshal(self):
         """
         Called by loading code after all parts and relationships have been
@@ -51,6 +52,7 @@ class ImageParts(object):
     Collection of |ImagePart| instances corresponding to each image part in
     the package.
     """
+
     def __init__(self):
         super(ImageParts, self).__init__()
         self._image_parts = []
@@ -106,10 +108,12 @@ class ImageParts(object):
         partname is unique by number, without regard to the extension. *ext*
         does not include the leading period.
         """
+
         def image_partname(n):
-            return PackURI('/word/media/image%d.%s' % (n, ext))
+            return PackURI("/word/media/image%d.%s" % (n, ext))
+
         used_numbers = [image_part.partname.idx for image_part in self]
-        for n in range(1, len(self)+1):
+        for n in range(1, len(self) + 1):
             if n not in used_numbers:
                 return image_partname(n)
-        return image_partname(len(self)+1)
+        return image_partname(len(self) + 1)

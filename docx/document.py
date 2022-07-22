@@ -4,9 +4,7 @@
 |Document| and closely related objects
 """
 
-from __future__ import (
-    absolute_import, division, print_function, unicode_literals
-)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from .blkcntnr import BlockItemContainer
 from .enum.section import WD_SECTION
@@ -24,14 +22,14 @@ class Document(ElementProxy):
     Use :func:`docx.Document` to open or create a document.
     """
 
-    __slots__ = ('_part', '__body')
+    __slots__ = ("_part", "__body")
 
     def __init__(self, element, part):
         super(Document, self).__init__(element)
         self._part = part
         self.__body = None
 
-    def add_heading(self, text='', level=1):
+    def add_heading(self, text="", level=1):
         """
         Return a heading paragraph newly added to the end of the document,
         containing *text* and having its paragraph style determined by
@@ -42,7 +40,7 @@ class Document(ElementProxy):
         """
         if not 0 <= level <= 9:
             raise ValueError("level must be in range 0-9, got %d" % level)
-        style = 'Title' if level == 0 else 'Heading %d' % level
+        style = "Title" if level == 0 else "Heading %d" % level
         return self.add_paragraph(text, style)
 
     def add_page_break(self):
@@ -54,7 +52,7 @@ class Document(ElementProxy):
         paragraph.add_run().add_break(WD_BREAK.PAGE)
         return paragraph
 
-    def add_paragraph(self, text='', style=None):
+    def add_paragraph(self, text="", style=None):
         """
         Return a paragraph newly added to the end of the document, populated
         with *text* and having paragraph style *style*. *text* can contain
@@ -64,85 +62,85 @@ class Document(ElementProxy):
         break.
         """
         return self._body.add_paragraph(text, style)
-    
+
     def add_citation(self, bookmark, par=None):
         if par is not None:
             paragraph = par
         else:
             paragraph = self.add_paragraph()
         run = paragraph.add_run()
-        fldChar = OxmlElement('w:fldChar')  # creates a new element
-        fldChar.set(qn('w:fldCharType'), 'begin')  # sets attribute on element
-        
-        instrText = OxmlElement('w:instrText')
-        instrText.set(qn('xml:space'), 'preserve')  # sets attribute on element
-        instrText.text = ' CITATION {:s} \l 1033'.format(bookmark)
-    
-        fldChar2 = OxmlElement('w:fldChar')
-        fldChar2.set(qn('w:fldCharType'), 'separate')
-        fldChar3 = OxmlElement('w:t')
+        fldChar = OxmlElement("w:fldChar")  # creates a new element
+        fldChar.set(qn("w:fldCharType"), "begin")  # sets attribute on element
+
+        instrText = OxmlElement("w:instrText")
+        instrText.set(qn("xml:space"), "preserve")  # sets attribute on element
+        instrText.text = " CITATION {:s} \l 1033".format(bookmark)
+
+        fldChar2 = OxmlElement("w:fldChar")
+        fldChar2.set(qn("w:fldCharType"), "separate")
+        fldChar3 = OxmlElement("w:t")
         fldChar3.text = "Right-click to update field."
         fldChar2.append(fldChar3)
-    
-        fldChar4 = OxmlElement('w:fldChar')
-        fldChar4.set(qn('w:fldCharType'), 'end')
-    
+
+        fldChar4 = OxmlElement("w:fldChar")
+        fldChar4.set(qn("w:fldCharType"), "end")
+
         r_element = run._r
         r_element.append(fldChar)
         r_element.append(instrText)
         r_element.append(fldChar2)
         r_element.append(fldChar4)
-        p_element = paragraph._p  
+        p_element = paragraph._p
 
-
-    def add_crossreference(self, bookmark, par=None, obj_type='figure'):
-#        print('input', bookmark)
-#        print('identifier', bookmark[:3])
-#        
-        if bookmark[:3] not in ['fig', 'tab', 'equ']:
-            str_ = '{:s} is an incorrect bookmark, bookmark should start with fig, tab or equ'.format(bookmark)
+    def add_crossreference(self, bookmark, par=None, obj_type="figure"):
+        #        print('input', bookmark)
+        #        print('identifier', bookmark[:3])
+        #
+        if bookmark[:3] not in ["fig", "tab", "equ"]:
+            str_ = "{:s} is an incorrect bookmark, bookmark should start with fig, tab or equ".format(
+                bookmark
+            )
             raise ValueError(str_)
         if par is not None:
             paragraph = par
         else:
             paragraph = self.add_paragraph()
 
-        fldChar = OxmlElement('w:fldChar')  # creates a new element
-        fldChar.set(qn('w:fldCharType'), 'begin')  # sets attribute on element
-        
-        instrText = OxmlElement('w:instrText')
-        instrText.set(qn('xml:space'), 'preserve') 
-        # sets attribute on element
-        instrText.text = ' REF _Ref{:s} \# 0 \h'.format(bookmark)
-#        instrText.text = ' REF {:s} \h'.format(bookmark)
-        fldChar2 = OxmlElement('w:fldChar')
-        fldChar2.set(qn('w:fldCharType'), 'separate')
-        fldChar3 = OxmlElement('w:t')
-        fldChar3.text = "1"
-#        instrTextFig.append(fldChar3)
-    
-        fldChar4 = OxmlElement('w:fldChar')
-        fldChar4.set(qn('w:fldCharType'), 'end')
+        fldChar = OxmlElement("w:fldChar")  # creates a new element
+        fldChar.set(qn("w:fldCharType"), "begin")  # sets attribute on element
 
+        instrText = OxmlElement("w:instrText")
+        instrText.set(qn("xml:space"), "preserve")
+        # sets attribute on element
+        instrText.text = " REF _Ref{:s} \# 0 \h".format(bookmark)
+        #        instrText.text = ' REF {:s} \h'.format(bookmark)
+        fldChar2 = OxmlElement("w:fldChar")
+        fldChar2.set(qn("w:fldCharType"), "separate")
+        fldChar3 = OxmlElement("w:t")
+        fldChar3.text = "1"
+        #        instrTextFig.append(fldChar3)
+
+        fldChar4 = OxmlElement("w:fldChar")
+        fldChar4.set(qn("w:fldCharType"), "end")
 
         run = paragraph.add_run()
         r_element = run._r
-        fig = OxmlElement('w:t')
-        fig.set(qn('xml:space'), 'preserve')        
-        
-        if bookmark[:3] == 'fig':
-            fig.text = 'figure '
-        if bookmark[:3] == 'tab':
-            fig.text = 'table '  
-        if bookmark[:3] == 'equ':
-            fig.text = 'equation '              
+        fig = OxmlElement("w:t")
+        fig.set(qn("xml:space"), "preserve")
+
+        if bookmark[:3] == "fig":
+            fig.text = "figure "
+        if bookmark[:3] == "tab":
+            fig.text = "table "
+        if bookmark[:3] == "equ":
+            fig.text = "equation "
         r_element.append(fig)
-        
+
         run = paragraph.add_run()
         r_element = run._r
         r_element.append(fldChar)
-        
-        run = paragraph.add_run()        
+
+        run = paragraph.add_run()
         r_element = run._r
         r_element.append(instrText)
 
@@ -151,69 +149,67 @@ class Document(ElementProxy):
         r_element.append(fldChar2)
 
         run = paragraph.add_run()
-        r_element = run._r               
+        r_element = run._r
         r_element.append(fldChar3)
-        
-        run = paragraph.add_run()
-        r_element = run._r               
-        r_element.append(fldChar4)
-        p_element = paragraph._p  
 
-    def create_caption(self, entry, paragraph, obj_type, bmark='1'):
+        run = paragraph.add_run()
+        r_element = run._r
+        r_element.append(fldChar4)
+        p_element = paragraph._p
+
+    def create_caption(self, entry, paragraph, obj_type, bmark="1"):
         obj_type = obj_type.lower()
         run = paragraph.add_run()
-        r = run._r       
+        r = run._r
 
-        par = paragraph._p        
+        par = paragraph._p
         run = paragraph.add_run()
         r = run._r
-               
-        bmrk = OxmlElement('w:bookmarkStart')
-        bmrk.set(qn('w:id'), '1')
-        bmrk.set(qn('w:name'), '_Ref{:s}'.format(bmark))
+
+        bmrk = OxmlElement("w:bookmarkStart")
+        bmrk.set(qn("w:id"), "1")
+        bmrk.set(qn("w:name"), "_Ref{:s}".format(bmark))
         par.append(bmrk)
-        
-        fig = OxmlElement('w:t')
-        fig.set(qn('xml:space'), 'preserve')        
-        if obj_type == 'figure':
-            fig.text = 'Figure '
-        if obj_type == 'table':
-            fig.text = 'Table '            
+
+        fig = OxmlElement("w:t")
+        fig.set(qn("xml:space"), "preserve")
+        if obj_type == "figure":
+            fig.text = "Figure "
+        if obj_type == "table":
+            fig.text = "Table "
         r.append(fig)
 
-        fldChar_1 = OxmlElement('w:fldSimple')
-        fldChar_1.set(qn('xml:space'), 'preserve')
-        if obj_type == 'figure':
-            fldChar_1.set(qn('w:instr'), ' SEQ Figure \* ARABIC ')
-        if obj_type == 'table':
-            fldChar_1.set(qn('w:instr'), ' SEQ Table \* ARABIC ')            
+        fldChar_1 = OxmlElement("w:fldSimple")
+        fldChar_1.set(qn("xml:space"), "preserve")
+        if obj_type == "figure":
+            fldChar_1.set(qn("w:instr"), " SEQ Figure \* ARABIC ")
+        if obj_type == "table":
+            fldChar_1.set(qn("w:instr"), " SEQ Table \* ARABIC ")
         par.append(fldChar_1)
-        
+
         run = paragraph.add_run()
         r = run._r
-        fldChar_2 = OxmlElement('w:fldChar')
-        fldChar_2.set(qn('w:fldCharType'), "end")
-        r.append(fldChar_2)                
+        fldChar_2 = OxmlElement("w:fldChar")
+        fldChar_2.set(qn("w:fldCharType"), "end")
+        r.append(fldChar_2)
 
-        bmrk_1 = OxmlElement('w:bookmarkEnd')
-        bmrk_1.set(qn('w:id'), '1')
+        bmrk_1 = OxmlElement("w:bookmarkEnd")
+        bmrk_1.set(qn("w:id"), "1")
         par.append(bmrk_1)
-        
-        caption = OxmlElement('w:t')
-        caption.set(qn('xml:space'), 'preserve')        
-        caption.text = ' {:s}'.format(entry)
-        run = paragraph.add_run(caption.text)
-        
-        #run._r.append(caption)  
-        
-    def add_caption(self, caption, bmark, obj_type='figure'):
-        """
 
-        """
-        par = self.add_paragraph(style='caption')
-        self.create_caption(caption, par,  obj_type, bmark)
+        caption = OxmlElement("w:t")
+        caption.set(qn("xml:space"), "preserve")
+        caption.text = " {:s}".format(entry)
+        run = paragraph.add_run(caption.text)
+
+        # run._r.append(caption)
+
+    def add_caption(self, caption, bmark, obj_type="figure"):
+        """ """
+        par = self.add_paragraph(style="caption")
+        self.create_caption(caption, par, obj_type, bmark)
         return par
-        
+
     def add_picture(self, image_path_or_stream, width=None, height=None, style=None):
         """
         Return a new picture shape added in its own paragraph at the end of
@@ -254,21 +250,23 @@ class Document(ElementProxy):
         table = self._body.add_table(rows, cols, self._block_width)
         table.style = style
         return table
-        
-    def bookmark_text(self, bookmark_name, text, underline = False, italic = False, bold = False, style = None):
+
+    def bookmark_text(
+        self, bookmark_name, text, underline=False, italic=False, bold=False, style=None
+    ):
         doc_element = self._part._element
-        bookmarks_list = doc_element.findall('.//' + qn('w:bookmarkStart'))
-        bookmarks_list = doc_element.findall('.//' + qn('wp:docPr'))
+        bookmarks_list = doc_element.findall(".//" + qn("w:bookmarkStart"))
+        bookmarks_list = doc_element.findall(".//" + qn("wp:docPr"))
         for bookmark in bookmarks_list:
-            name = bookmark.get(qn('wp:name'))
-            print('asdf?', bookmark.name)
-            if  bookmark.name == bookmark_name:
+            name = bookmark.get(qn("wp:name"))
+            print("asdf?", bookmark.name)
+            if bookmark.name == bookmark_name:
                 par = bookmark.getparent()
-                
-#                if not isinstance(par, CT_P):
-#                    return False
-#                else:
-                print('test')
+
+                #                if not isinstance(par, CT_P):
+                #                    return False
+                #                else:
+                print("test")
                 i = par.index(bookmark) + 1
                 print(i)
                 p = self.add_paragraph()
@@ -282,13 +280,13 @@ class Document(ElementProxy):
                 p._p = p._element = None
                 return True
         return False
-        
+
     def bookmark_table(self, bookmark_name, rows, cols, style=None):
         tb = self.add_table(rows=rows, cols=cols, style=style)
         doc_element = self._part._element
-        bookmarks_list = doc_element.findall('.//' + qn('w:bookmarkStart'))
+        bookmarks_list = doc_element.findall(".//" + qn("w:bookmarkStart"))
         for bookmark in bookmarks_list:
-            name = bookmark.get(qn('w:name'))
+            name = bookmark.get(qn("w:name"))
             if name == bookmark_name:
                 par = bookmark.getparent()
                 if not isinstance(par, CT_P):
@@ -299,11 +297,13 @@ class Document(ElementProxy):
                     return tb
         return tb
 
-    def bookmark_picture(self, bookmark_name, picture, width=None, height=None, caption='', bmark=''):
+    def bookmark_picture(
+        self, bookmark_name, picture, width=None, height=None, caption="", bmark=""
+    ):
         doc_element = self._part._element
-        bookmarks_list = doc_element.findall('.//' + qn('w:bookmarkStart'))
+        bookmarks_list = doc_element.findall(".//" + qn("w:bookmarkStart"))
         for bookmark in bookmarks_list:
-            name = bookmark.get(qn('w:name'))
+            name = bookmark.get(qn("w:name"))
             if name == bookmark_name:
                 par = bookmark.getparent()
                 if not isinstance(par, CT_P):
@@ -312,98 +312,100 @@ class Document(ElementProxy):
                     i = par.index(bookmark) + 1
                     p = self.add_paragraph()
                     run = p.add_run()
-                    run.add_picture(picture, width, height) 
-                    
-#                    run.add_caption(caption, bmark)                     
+                    run.add_picture(picture, width, height)
+
+                    #                    run.add_caption(caption, bmark)
                     par.insert(i, run._element)
                     p = p._element
                     p.getparent().remove(p)
                     p._p = None
                     p._element = None
                     return True
-    
+
     def delete_paragraph(self, paragraph):
         p = paragraph._element
         p.getparent().remove(p)
         p._p = p._element = None
 
-
     def add_table_of_contents(self):
         paragraph = self.add_paragraph()
         run = paragraph.add_run()
-        fldChar = OxmlElement('w:fldChar')  # creates a new element
-        fldChar.set(qn('w:fldCharType'), 'begin')  # sets attribute on element
-        instrText = OxmlElement('w:instrText')
-        instrText.set(qn('xml:space'), 'preserve')  # sets attribute on element
-        instrText.text = r'TOC \o "1-3" \h \z \u'   # change 1-3 depending on heading levels you need
-    
-        fldChar2 = OxmlElement('w:fldChar')
-        fldChar2.set(qn('w:fldCharType'), 'separate')
-        fldChar3 = OxmlElement('w:t')
+        fldChar = OxmlElement("w:fldChar")  # creates a new element
+        fldChar.set(qn("w:fldCharType"), "begin")  # sets attribute on element
+        instrText = OxmlElement("w:instrText")
+        instrText.set(qn("xml:space"), "preserve")  # sets attribute on element
+        instrText.text = (
+            r'TOC \o "1-3" \h \z \u'  # change 1-3 depending on heading levels you need
+        )
+
+        fldChar2 = OxmlElement("w:fldChar")
+        fldChar2.set(qn("w:fldCharType"), "separate")
+        fldChar3 = OxmlElement("w:t")
         fldChar3.text = "Right-click to update field."
         fldChar2.append(fldChar3)
-    
-        fldChar4 = OxmlElement('w:fldChar')
-        fldChar4.set(qn('w:fldCharType'), 'end')
-    
+
+        fldChar4 = OxmlElement("w:fldChar")
+        fldChar4.set(qn("w:fldCharType"), "end")
+
         r_element = run._r
         r_element.append(fldChar)
         r_element.append(instrText)
         r_element.append(fldChar2)
         r_element.append(fldChar4)
-        p_element = paragraph._p  
+        p_element = paragraph._p
 
     def add_bibliography(self):
         paragraph = self.add_paragraph()
         run = paragraph.add_run()
-        fldChar = OxmlElement('w:fldChar')  # creates a new element
-        fldChar.set(qn('w:fldCharType'), 'begin')  # sets attribute on element
-        instrText = OxmlElement('w:instrText')
-        instrText.set(qn('xml:space'), 'preserve')  # sets attribute on element
-        instrText.text = r'BIBLIOGRAPHY'   # change 1-3 depending on heading levels you need
-    
-        fldChar2 = OxmlElement('w:fldChar')
-        fldChar2.set(qn('w:fldCharType'), 'separate')
-        fldChar3 = OxmlElement('w:t')
+        fldChar = OxmlElement("w:fldChar")  # creates a new element
+        fldChar.set(qn("w:fldCharType"), "begin")  # sets attribute on element
+        instrText = OxmlElement("w:instrText")
+        instrText.set(qn("xml:space"), "preserve")  # sets attribute on element
+        instrText.text = (
+            r"BIBLIOGRAPHY"  # change 1-3 depending on heading levels you need
+        )
+
+        fldChar2 = OxmlElement("w:fldChar")
+        fldChar2.set(qn("w:fldCharType"), "separate")
+        fldChar3 = OxmlElement("w:t")
         fldChar3.text = "Right-click to update field."
         fldChar2.append(fldChar3)
-    
-        fldChar4 = OxmlElement('w:fldChar')
-        fldChar4.set(qn('w:fldCharType'), 'end')
-    
+
+        fldChar4 = OxmlElement("w:fldChar")
+        fldChar4.set(qn("w:fldCharType"), "end")
+
         r_element = run._r
         r_element.append(fldChar)
         r_element.append(instrText)
         r_element.append(fldChar2)
         r_element.append(fldChar4)
-        p_element = paragraph._p         
-                    
+        p_element = paragraph._p
+
     def remove_picture(self, bookmark_name):
         doc_element = self._part._element
-        bookmarks_list = doc_element.findall('.//' + qn('w:bookmarkStart'))
+        bookmarks_list = doc_element.findall(".//" + qn("w:bookmarkStart"))
         for bookmark in bookmarks_list:
-            name = bookmark.get(qn('w:name'))
+            name = bookmark.get(qn("w:name"))
             if name == bookmark_name:
                 par = bookmark.getparent()
 
-
-#                print(doc_element)
+                #                print(doc_element)
                 if not isinstance(par, CT_P):
                     return False
                 else:
                     i = par.index(bookmark) + 1
                     p = self.add_paragraph()
                     run = p.add_run()
-#                    run.add_picture(picture, width, height) 
-                    
-#                    run.add_caption(caption, bmark)                     
+                    #                    run.add_picture(picture, width, height)
+
+                    #                    run.add_caption(caption, bmark)
                     par.insert(i, run._element)
                     p = p._element
                     p.getparent().remove(p)
                     p._p = None
                     p._element = None
-                    return True    
-              
+                    return True
+
     @property
     def core_properties(self):
         """
@@ -414,10 +416,9 @@ class Document(ElementProxy):
 
     @property
     def content_control(self):
-        """
-        """
+        """ """
         return self._part.content_control
-        
+
     @property
     def inline_shapes(self):
         """
@@ -492,9 +493,7 @@ class Document(ElementProxy):
         space between the margins of the last section of this document.
         """
         section = self.sections[-1]
-        return Emu(
-            section.page_width - section.left_margin - section.right_margin
-        )
+        return Emu(section.page_width - section.left_margin - section.right_margin)
 
     @property
     def _body(self):
@@ -511,6 +510,7 @@ class _Body(BlockItemContainer):
     Proxy for ``<w:body>`` element in this document, having primarily a
     container role.
     """
+
     def __init__(self, body_elm, parent):
         super(_Body, self).__init__(body_elm, parent)
         self._body = body_elm

@@ -12,9 +12,9 @@ class CT_OMath(BaseOxmlElement):
     """
     ``<m:oMath>`` element, containing math contents.
     """
-    
+
+
 class CT_OMathPara(BaseOxmlElement):
     """
     ``<m:oMathPara>`` element, containing math contents.
     """
-    

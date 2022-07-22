@@ -16,7 +16,6 @@ from ..unitutil.mock import initializer_mock
 
 
 class DescribeBmp(object):
-
     def it_can_construct_from_a_bmp_stream(self, from_stream_fixture):
         stream, Bmp__init__, cx, cy, horz_dpi, vert_dpi = from_stream_fixture
         bmp = Bmp.from_stream(stream)
@@ -29,7 +28,7 @@ class DescribeBmp(object):
 
     def it_knows_its_default_ext(self):
         bmp = Bmp(None, None, None, None)
-        assert bmp.default_ext == 'bmp'
+        assert bmp.default_ext == "bmp"
 
     # fixtures -------------------------------------------------------
 
@@ -37,8 +36,8 @@ class DescribeBmp(object):
     def from_stream_fixture(self, Bmp__init__):
         cx, cy, horz_dpi, vert_dpi = 26, 43, 200, 96
         bytes_ = (
-            b'fillerfillerfiller\x1A\x00\x00\x00\x2B\x00\x00\x00'
-            b'fillerfiller\xB8\x1E\x00\x00\x00\x00\x00\x00'
+            b"fillerfillerfiller\x1A\x00\x00\x00\x2B\x00\x00\x00"
+            b"fillerfiller\xB8\x1E\x00\x00\x00\x00\x00\x00"
         )
         stream = BytesIO(bytes_)
         return stream, Bmp__init__, cx, cy, horz_dpi, vert_dpi

@@ -4,8 +4,7 @@
 Unit test suite for the docx.opc.rel module
 """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import pytest
 
@@ -14,8 +13,7 @@ from docx.opc.packuri import PackURI
 from docx.opc.part import Part
 from docx.opc.rel import Relationships, _Relationship
 
-from ..unitutil.mock import (Mock, PropertyMock, call, class_mock,
-                             instance_mock, patch)
+from ..unitutil.mock import Mock, PropertyMock, call, class_mock, instance_mock, patch
 
 
 class Describe_Relationship(object):

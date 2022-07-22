@@ -17,9 +17,17 @@ from docx.opc.parts.coreprops import CorePropertiesPart
 from docx.opc.pkgreader import PackageReader
 from docx.opc.rel import Relationships, _Relationship
 
-from ..unitutil.mock import (Mock, PropertyMock, call, class_mock,
-                             instance_mock, loose_mock, method_mock, patch,
-                             property_mock)
+from ..unitutil.mock import (
+    Mock,
+    PropertyMock,
+    call,
+    class_mock,
+    instance_mock,
+    loose_mock,
+    method_mock,
+    patch,
+    property_mock,
+)
 
 
 class DescribeOpcPackage(object):

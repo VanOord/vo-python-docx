@@ -12,8 +12,15 @@ from docx.opc.part import Part
 from docx.opc.phys_pkg import _ZipPkgWriter
 from docx.opc.pkgwriter import PackageWriter, _ContentTypesItem
 
-from ..unitutil.mock import (MagicMock, Mock, call, class_mock, instance_mock,
-                             method_mock, patch)
+from ..unitutil.mock import (
+    MagicMock,
+    Mock,
+    call,
+    class_mock,
+    instance_mock,
+    method_mock,
+    patch,
+)
 from .unitdata.types import a_Default, a_Types, an_Override
 
 

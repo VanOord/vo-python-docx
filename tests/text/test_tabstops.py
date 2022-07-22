@@ -5,8 +5,7 @@ Test suite for the docx.text.tabstops module, containing the TabStops and
 TabStop objects.
 """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import pytest
 

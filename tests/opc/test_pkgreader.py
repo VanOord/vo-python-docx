@@ -12,13 +12,25 @@ from docx.opc.constants import CONTENT_TYPE as CT
 from docx.opc.constants import RELATIONSHIP_TARGET_MODE as RTM
 from docx.opc.packuri import PackURI
 from docx.opc.phys_pkg import _ZipPkgReader
-from docx.opc.pkgreader import (PackageReader, _ContentTypeMap,
-                                _SerializedPart, _SerializedRelationship,
-                                _SerializedRelationships)
+from docx.opc.pkgreader import (
+    PackageReader,
+    _ContentTypeMap,
+    _SerializedPart,
+    _SerializedRelationship,
+    _SerializedRelationships,
+)
 
-from ..unitutil.mock import (Mock, call, class_mock, function_mock,
-                             initializer_mock, instance_mock, loose_mock,
-                             method_mock, patch)
+from ..unitutil.mock import (
+    Mock,
+    call,
+    class_mock,
+    function_mock,
+    initializer_mock,
+    instance_mock,
+    loose_mock,
+    method_mock,
+    patch,
+)
 from .unitdata.types import a_Default, a_Types, an_Override
 
 

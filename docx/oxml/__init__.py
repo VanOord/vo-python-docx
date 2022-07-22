@@ -99,11 +99,20 @@ register_element_cls("w:pgSz", CT_PageSz)
 register_element_cls("w:sectPr", CT_SectPr)
 register_element_cls("w:type", CT_SectType)
 
-from .shape import (CT_Blip, CT_BlipFillProperties, CT_GraphicalObject,
-                    CT_GraphicalObjectData, CT_Inline,
-                    CT_NonVisualDrawingProps, CT_Picture, CT_PictureNonVisual,
-                    CT_Point2D, CT_PositiveSize2D, CT_ShapeProperties,
-                    CT_Transform2D)
+from .shape import (
+    CT_Blip,
+    CT_BlipFillProperties,
+    CT_GraphicalObject,
+    CT_GraphicalObjectData,
+    CT_Inline,
+    CT_NonVisualDrawingProps,
+    CT_Picture,
+    CT_PictureNonVisual,
+    CT_Point2D,
+    CT_PositiveSize2D,
+    CT_ShapeProperties,
+    CT_Transform2D,
+)
 
 register_element_cls("a:blip", CT_Blip)
 register_element_cls("a:ext", CT_PositiveSize2D)
@@ -135,9 +144,21 @@ register_element_cls("w:styles", CT_Styles)
 register_element_cls("w:uiPriority", CT_DecimalNumber)
 register_element_cls("w:unhideWhenUsed", CT_OnOff)
 
-from .table import (CT_Height, CT_Row, CT_Tbl, CT_TblGrid, CT_TblGridCol,
-                    CT_TblLayoutType, CT_TblPr, CT_TblWidth, CT_Tc, CT_TcPr,
-                    CT_TrPr, CT_VerticalJc, CT_VMerge)
+from .table import (
+    CT_Height,
+    CT_Row,
+    CT_Tbl,
+    CT_TblGrid,
+    CT_TblGridCol,
+    CT_TblLayoutType,
+    CT_TblPr,
+    CT_TblWidth,
+    CT_Tc,
+    CT_TcPr,
+    CT_TrPr,
+    CT_VerticalJc,
+    CT_VMerge,
+)
 
 register_element_cls("w:bidiVisual", CT_OnOff)
 register_element_cls("w:gridCol", CT_TblGridCol)
@@ -156,8 +177,15 @@ register_element_cls("w:trPr", CT_TrPr)
 register_element_cls("w:vAlign", CT_VerticalJc)
 register_element_cls("w:vMerge", CT_VMerge)
 
-from .text.font import (CT_Color, CT_Fonts, CT_Highlight, CT_HpsMeasure,
-                        CT_RPr, CT_Underline, CT_VerticalAlignRun)
+from .text.font import (
+    CT_Color,
+    CT_Fonts,
+    CT_Highlight,
+    CT_HpsMeasure,
+    CT_RPr,
+    CT_Underline,
+    CT_VerticalAlignRun,
+)
 
 register_element_cls("w:b", CT_OnOff)
 register_element_cls("w:bCs", CT_OnOff)
@@ -192,8 +220,7 @@ from .text.paragraph import CT_P
 
 register_element_cls("w:p", CT_P)
 
-from .text.parfmt import (CT_Ind, CT_Jc, CT_PPr, CT_Spacing, CT_TabStop,
-                          CT_TabStops)
+from .text.parfmt import CT_Ind, CT_Jc, CT_PPr, CT_Spacing, CT_TabStop, CT_TabStops
 
 register_element_cls("w:ind", CT_Ind)
 register_element_cls("w:jc", CT_Jc)
@@ -207,8 +234,7 @@ register_element_cls("w:tab", CT_TabStop)
 register_element_cls("w:tabs", CT_TabStops)
 register_element_cls("w:widowControl", CT_OnOff)
 
-from .text.run import (CT_R, CT_Br, CT_FldChar, CT_Hyperlink, CT_SimpleField,
-                       CT_Text)
+from .text.run import CT_R, CT_Br, CT_FldChar, CT_Hyperlink, CT_SimpleField, CT_Text
 
 register_element_cls("w:br", CT_Br)
 register_element_cls("w:r", CT_R)

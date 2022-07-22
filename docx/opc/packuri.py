@@ -15,7 +15,7 @@ class PackURI(str):
     filename slice. Behaves as |str| otherwise.
     """
 
-    _filename_re = re.compile("([a-zA-Z]+)([1-9][0-9]*)?")
+    _filename_re = re.compile(r"([a-zA-Z]+)([1-9][0-9]*)?")
 
     def __new__(cls, pack_uri_str):
         if not pack_uri_str[0] == "/":

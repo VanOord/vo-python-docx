@@ -4,8 +4,7 @@
 Unit test suite for the docx.opc.coreprops module
 """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from datetime import datetime
 

@@ -20,8 +20,14 @@ from docx.opc.constants import CONTENT_TYPE as CT
 from docx.shared import Emu, Length
 
 from ..unitutil.file import test_file
-from ..unitutil.mock import (class_mock, function_mock, initializer_mock,
-                             instance_mock, method_mock, property_mock)
+from ..unitutil.mock import (
+    class_mock,
+    function_mock,
+    initializer_mock,
+    instance_mock,
+    method_mock,
+    property_mock,
+)
 
 
 class DescribeImage(object):

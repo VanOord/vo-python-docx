@@ -7,8 +7,12 @@ from __future__ import absolute_import, print_function, unicode_literals
 import pytest
 
 from docx.enum.style import WD_STYLE_TYPE
-from docx.enum.table import (WD_ALIGN_VERTICAL, WD_ROW_HEIGHT,
-                             WD_TABLE_ALIGNMENT, WD_TABLE_DIRECTION)
+from docx.enum.table import (
+    WD_ALIGN_VERTICAL,
+    WD_ROW_HEIGHT,
+    WD_TABLE_ALIGNMENT,
+    WD_TABLE_DIRECTION,
+)
 from docx.oxml import parse_xml
 from docx.oxml.table import CT_Tc
 from docx.parts.document import DocumentPart

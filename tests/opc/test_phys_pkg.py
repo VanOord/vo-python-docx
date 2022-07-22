@@ -18,8 +18,13 @@ import pytest
 
 from docx.opc.exceptions import PackageNotFoundError
 from docx.opc.packuri import PACKAGE_URI, PackURI
-from docx.opc.phys_pkg import (PhysPkgReader, PhysPkgWriter, _DirPkgReader,
-                               _ZipPkgReader, _ZipPkgWriter)
+from docx.opc.phys_pkg import (
+    PhysPkgReader,
+    PhysPkgWriter,
+    _DirPkgReader,
+    _ZipPkgReader,
+    _ZipPkgWriter,
+)
 
 from ..unitutil.file import absjoin, test_file_dir
 from ..unitutil.mock import Mock, class_mock, loose_mock

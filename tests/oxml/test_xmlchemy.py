@@ -13,11 +13,19 @@ from docx.oxml import parse_xml, register_element_cls
 from docx.oxml.exceptions import InvalidXmlError
 from docx.oxml.ns import qn
 from docx.oxml.simpletypes import BaseIntType
-from docx.oxml.xmlchemy import (BaseOxmlElement, Choice, OneAndOnlyOne,
-                                OneOrMore, OptionalAttribute,
-                                RequiredAttribute, XmlString, ZeroOrMore,
-                                ZeroOrOne, ZeroOrOneChoice,
-                                serialize_for_reading)
+from docx.oxml.xmlchemy import (
+    BaseOxmlElement,
+    Choice,
+    OneAndOnlyOne,
+    OneOrMore,
+    OptionalAttribute,
+    RequiredAttribute,
+    XmlString,
+    ZeroOrMore,
+    ZeroOrOne,
+    ZeroOrOneChoice,
+    serialize_for_reading,
+)
 
 from ..unitdata import BaseBuilder
 from .unitdata.text import a_b, a_u, an_i, an_rPr

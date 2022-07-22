@@ -4,8 +4,7 @@
 Test suite for the docx.document module
 """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import pytest
 
@@ -24,8 +23,7 @@ from docx.text.paragraph import Paragraph
 from docx.text.run import Run
 
 from .unitutil.cxml import element, xml
-from .unitutil.mock import (class_mock, instance_mock, method_mock,
-                            property_mock)
+from .unitutil.mock import class_mock, instance_mock, method_mock, property_mock
 
 
 class DescribeDocument(object):

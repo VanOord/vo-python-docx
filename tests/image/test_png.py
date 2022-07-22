@@ -12,11 +12,25 @@ from docx.compat import BytesIO
 from docx.image.constants import MIME_TYPE, PNG_CHUNK_TYPE
 from docx.image.exceptions import InvalidImageStreamError
 from docx.image.helpers import BIG_ENDIAN, StreamReader
-from docx.image.png import (Png, _Chunk, _ChunkFactory, _ChunkParser, _Chunks,
-                            _IHDRChunk, _pHYsChunk, _PngParser)
+from docx.image.png import (
+    Png,
+    _Chunk,
+    _ChunkFactory,
+    _ChunkParser,
+    _Chunks,
+    _IHDRChunk,
+    _pHYsChunk,
+    _PngParser,
+)
 
-from ..unitutil.mock import (call, class_mock, function_mock, initializer_mock,
-                             instance_mock, method_mock)
+from ..unitutil.mock import (
+    call,
+    class_mock,
+    function_mock,
+    initializer_mock,
+    instance_mock,
+    method_mock,
+)
 
 
 class DescribePng(object):

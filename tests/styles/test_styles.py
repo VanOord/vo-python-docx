@@ -4,8 +4,7 @@
 Test suite for the docx.styles.styles module
 """
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 import pytest
 
@@ -16,8 +15,7 @@ from docx.styles.style import BaseStyle
 from docx.styles.styles import Styles
 
 from ..unitutil.cxml import element
-from ..unitutil.mock import (call, class_mock, function_mock, instance_mock,
-                             method_mock)
+from ..unitutil.mock import call, class_mock, function_mock, instance_mock, method_mock
 
 
 class DescribeStyles(object):

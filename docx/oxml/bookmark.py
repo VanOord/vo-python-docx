@@ -2,8 +2,7 @@
 
 """Custom element classes related to bookmarks."""
 
-from __future__ import (absolute_import, division, print_function,
-                        unicode_literals)
+from __future__ import absolute_import, division, print_function, unicode_literals
 
 from docx.oxml.simpletypes import ST_DecimalNumber, ST_String
 from docx.oxml.xmlchemy import BaseOxmlElement, RequiredAttribute

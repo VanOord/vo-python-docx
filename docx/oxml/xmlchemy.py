@@ -39,7 +39,7 @@ class XmlString(Unicode):
     #  front      attrs                                     | text
     #                                                     close
 
-    _xml_elm_line_patt = re.compile("( *</?[\w:]+)(.*?)(/?>)([^<]*</[\w:]+>)?$")
+    _xml_elm_line_patt = re.compile(r"( *</?[\w:]+)(.*?)(/?>)([^<]*</[\w:]+>)?$")
 
     def __eq__(self, other):
         lines = self.splitlines()

@@ -4,13 +4,14 @@
 Paragraph-related proxy types.
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from ..enum.style import WD_STYLE_TYPE
-from .parfmt import ParagraphFormat
-from .run import Run
 from ..shared import Parented
 from .math import Equation
+from .parfmt import ParagraphFormat
+from .run import Run
 
 
 class Paragraph(Parented):

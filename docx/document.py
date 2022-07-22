@@ -4,16 +4,18 @@
 |Document| and closely related objects
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+from docx.oxml import OxmlElement
 
 from .blkcntnr import BlockItemContainer
 from .enum.section import WD_SECTION
 from .enum.text import WD_BREAK
+from .oxml import CT_P
+from .oxml.shared import qn
 from .section import Section, Sections
 from .shared import ElementProxy, Emu
-from .oxml.shared import qn
-from .oxml import CT_P
-from docx.oxml import OxmlElement
 
 
 class Document(ElementProxy):

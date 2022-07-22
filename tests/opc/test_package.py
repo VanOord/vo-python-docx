@@ -15,19 +15,11 @@ from docx.opc.packuri import PACKAGE_URI
 from docx.opc.part import Part
 from docx.opc.parts.coreprops import CorePropertiesPart
 from docx.opc.pkgreader import PackageReader
-from docx.opc.rel import _Relationship, Relationships
+from docx.opc.rel import Relationships, _Relationship
 
-from ..unitutil.mock import (
-    call,
-    class_mock,
-    instance_mock,
-    loose_mock,
-    method_mock,
-    Mock,
-    patch,
-    PropertyMock,
-    property_mock,
-)
+from ..unitutil.mock import (Mock, PropertyMock, call, class_mock,
+                             instance_mock, loose_mock, method_mock, patch,
+                             property_mock)
 
 
 class DescribeOpcPackage(object):

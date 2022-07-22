@@ -11,14 +11,8 @@ from __future__ import absolute_import, print_function
 
 import pytest
 
-from docx.enum.base import (
-    alias,
-    Enumeration,
-    EnumMember,
-    ReturnValueOnlyEnumMember,
-    XmlEnumeration,
-    XmlMappedEnumMember,
-)
+from docx.enum.base import (Enumeration, EnumMember, ReturnValueOnlyEnumMember,
+                            XmlEnumeration, XmlMappedEnumMember, alias)
 
 
 @alias("BARFOO")

@@ -4,17 +4,14 @@
 Custom element classes related to text runs (CT_R).
 """
 
-from ..ns import qn
-from ..simpletypes import ST_BrClear, ST_BrType, ST_OnOff, ST_String, ST_FldCharType
-from ..xmlchemy import (
-    BaseOxmlElement,
-    OptionalAttribute,
-    ZeroOrMore,
-    ZeroOrOne,
-    RequiredAttribute,
-)
-from docx.oxml import OxmlElement
 from docx.enum.fields import WD_FIELDCODE
+from docx.oxml import OxmlElement
+
+from ..ns import qn
+from ..simpletypes import (ST_BrClear, ST_BrType, ST_FldCharType, ST_OnOff,
+                           ST_String)
+from ..xmlchemy import (BaseOxmlElement, OptionalAttribute, RequiredAttribute,
+                        ZeroOrMore, ZeroOrOne)
 
 
 class CT_SimpleField(BaseOxmlElement):

@@ -5,13 +5,10 @@ Step implementations for basic API features
 """
 
 from behave import given, then, when
-
-import docx
-
-from docx import Document
-
 from helpers import test_docx
 
+import docx
+from docx import Document
 
 # given ====================================================
 

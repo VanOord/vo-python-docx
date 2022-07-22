@@ -4,18 +4,17 @@
 Step implementations for font-related features.
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from behave import given, then, when
+from helpers import test_docx
 
 from docx import Document
 from docx.dml.color import ColorFormat
 from docx.enum.dml import MSO_COLOR_TYPE, MSO_THEME_COLOR
 from docx.enum.text import WD_COLOR_INDEX, WD_UNDERLINE
 from docx.shared import RGBColor
-
-from helpers import test_docx
-
 
 # given ===================================================
 

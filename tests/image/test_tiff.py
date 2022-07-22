@@ -11,28 +11,12 @@ import pytest
 from docx.compat import BytesIO
 from docx.image.constants import MIME_TYPE, TIFF_TAG
 from docx.image.helpers import BIG_ENDIAN, LITTLE_ENDIAN, StreamReader
-from docx.image.tiff import (
-    _AsciiIfdEntry,
-    _IfdEntries,
-    _IfdEntry,
-    _IfdEntryFactory,
-    _IfdParser,
-    _LongIfdEntry,
-    _RationalIfdEntry,
-    _ShortIfdEntry,
-    Tiff,
-    _TiffParser,
-)
+from docx.image.tiff import (Tiff, _AsciiIfdEntry, _IfdEntries, _IfdEntry,
+                             _IfdEntryFactory, _IfdParser, _LongIfdEntry,
+                             _RationalIfdEntry, _ShortIfdEntry, _TiffParser)
 
-from ..unitutil.mock import (
-    call,
-    class_mock,
-    function_mock,
-    initializer_mock,
-    instance_mock,
-    loose_mock,
-    method_mock,
-)
+from ..unitutil.mock import (call, class_mock, function_mock, initializer_mock,
+                             instance_mock, loose_mock, method_mock)
 
 
 class DescribeTiff(object):

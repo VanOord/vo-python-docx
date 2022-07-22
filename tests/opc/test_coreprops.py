@@ -4,11 +4,12 @@
 Unit test suite for the docx.opc.coreprops module
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
-
-import pytest
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from datetime import datetime
+
+import pytest
 
 from docx.opc.coreprops import CoreProperties
 from docx.oxml import parse_xml

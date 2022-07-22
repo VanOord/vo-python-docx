@@ -4,15 +4,16 @@
 Test suite for docx.dml.color module.
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
-from docx.enum.dml import MSO_COLOR_TYPE, MSO_THEME_COLOR
+import pytest
+
 from docx.dml.color import ColorFormat
+from docx.enum.dml import MSO_COLOR_TYPE, MSO_THEME_COLOR
 from docx.shared import RGBColor
 
 from ..unitutil.cxml import element, xml
-
-import pytest
 
 
 class DescribeColorFormat(object):

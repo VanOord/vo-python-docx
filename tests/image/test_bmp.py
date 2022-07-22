@@ -9,8 +9,8 @@ from __future__ import absolute_import, print_function
 import pytest
 
 from docx.compat import BytesIO
-from docx.image.constants import MIME_TYPE
 from docx.image.bmp import Bmp
+from docx.image.constants import MIME_TYPE
 
 from ..unitutil.mock import initializer_mock
 

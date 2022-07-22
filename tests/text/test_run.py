@@ -4,7 +4,10 @@
 Test suite for the docx.text.run module
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+import pytest
 
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.text import WD_BREAK, WD_UNDERLINE
@@ -12,8 +15,6 @@ from docx.parts.document import DocumentPart
 from docx.shape import InlineShape
 from docx.text.font import Font
 from docx.text.run import Run
-
-import pytest
 
 from ..unitutil.cxml import element, xml
 from ..unitutil.mock import class_mock, instance_mock, property_mock

@@ -4,11 +4,12 @@
 Test suite for the docx.document module
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 import pytest
 
-from docx.document import _Body, Document
+from docx.document import Document, _Body
 from docx.enum.section import WD_SECTION
 from docx.enum.text import WD_BREAK
 from docx.opc.coreprops import CoreProperties
@@ -23,7 +24,8 @@ from docx.text.paragraph import Paragraph
 from docx.text.run import Run
 
 from .unitutil.cxml import element, xml
-from .unitutil.mock import class_mock, instance_mock, method_mock, property_mock
+from .unitutil.mock import (class_mock, instance_mock, method_mock,
+                            property_mock)
 
 
 class DescribeDocument(object):

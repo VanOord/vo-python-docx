@@ -4,13 +4,14 @@
 Core properties part, corresponds to ``/docProps/core.xml`` part in package.
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from datetime import datetime
 
+from ...oxml.customxml import CT_CustomXML
 from ..constants import CONTENT_TYPE as CT
 from ..customxml import CustomXML, CustomXmlBase
-from ...oxml.customxml import CT_CustomXML
 from ..packuri import PackURI
 from ..part import XmlPart
 

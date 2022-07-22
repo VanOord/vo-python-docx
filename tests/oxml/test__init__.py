@@ -7,7 +7,6 @@ Test suite for pptx.oxml.__init__.py module, primarily XML parser-related.
 from __future__ import print_function, unicode_literals
 
 import pytest
-
 from lxml import etree
 
 from docx.oxml import OxmlElement, oxml_parser, parse_xml, register_element_cls

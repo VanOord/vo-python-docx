@@ -5,11 +5,9 @@ Step implementations for numbering-related features
 """
 
 from behave import given, then, when
-
-from docx import Document
-
 from helpers import test_docx
 
+from docx import Document
 
 # given ===================================================
 

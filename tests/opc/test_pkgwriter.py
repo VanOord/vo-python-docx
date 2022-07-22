@@ -10,18 +10,11 @@ from docx.opc.constants import CONTENT_TYPE as CT
 from docx.opc.packuri import PackURI
 from docx.opc.part import Part
 from docx.opc.phys_pkg import _ZipPkgWriter
-from docx.opc.pkgwriter import _ContentTypesItem, PackageWriter
+from docx.opc.pkgwriter import PackageWriter, _ContentTypesItem
 
+from ..unitutil.mock import (MagicMock, Mock, call, class_mock, instance_mock,
+                             method_mock, patch)
 from .unitdata.types import a_Default, a_Types, an_Override
-from ..unitutil.mock import (
-    call,
-    class_mock,
-    instance_mock,
-    MagicMock,
-    method_mock,
-    Mock,
-    patch,
-)
 
 
 class DescribePackageWriter(object):

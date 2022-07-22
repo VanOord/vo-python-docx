@@ -5,22 +5,12 @@ Test suite for opc.oxml module
 """
 
 from docx.opc.constants import RELATIONSHIP_TARGET_MODE as RTM
-from docx.opc.oxml import (
-    CT_Default,
-    CT_Override,
-    CT_Relationship,
-    CT_Relationships,
-    CT_Types,
-)
+from docx.opc.oxml import (CT_Default, CT_Override, CT_Relationship,
+                           CT_Relationships, CT_Types)
 from docx.oxml.xmlchemy import serialize_for_reading
 
-from .unitdata.rels import (
-    a_Default,
-    an_Override,
-    a_Relationship,
-    a_Relationships,
-    a_Types,
-)
+from .unitdata.rels import (a_Default, a_Relationship, a_Relationships,
+                            a_Types, an_Override)
 
 
 class DescribeCT_Default(object):

@@ -7,11 +7,9 @@ General-purpose step implementations
 import os
 
 from behave import given, when
-
-from docx import Document
-
 from helpers import saved_docx_path
 
+from docx import Document
 
 # given ===================================================
 

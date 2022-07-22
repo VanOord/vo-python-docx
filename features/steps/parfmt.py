@@ -4,17 +4,16 @@
 Step implementations for paragraph format-related features.
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from behave import given, then, when
+from helpers import test_docx
 
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
 from docx.shared import Pt
 from docx.text.tabstops import TabStops
-
-from helpers import test_docx
-
 
 # given ===================================================
 

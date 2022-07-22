@@ -13,14 +13,8 @@ from docx.oxml.ns import nsmap
 from docx.shape import InlineShape, InlineShapes
 from docx.shared import Length
 
-from .oxml.unitdata.dml import (
-    a_blip,
-    a_blipFill,
-    a_graphic,
-    a_graphicData,
-    a_pic,
-    an_inline,
-)
+from .oxml.unitdata.dml import (a_blip, a_blipFill, a_graphic, a_graphicData,
+                                a_pic, an_inline)
 from .unitutil.cxml import element, xml
 from .unitutil.mock import loose_mock
 

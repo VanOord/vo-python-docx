@@ -7,15 +7,15 @@ element classes.
 
 from __future__ import absolute_import
 
-from lxml import etree
-
 import re
 
-from . import OxmlElement
+from lxml import etree
+
 from ..compat import Unicode
+from ..shared import lazyproperty
+from . import OxmlElement
 from .exceptions import InvalidXmlError
 from .ns import NamespacePrefixedTag, nsmap, qn
-from ..shared import lazyproperty
 
 
 def serialize_for_reading(element):

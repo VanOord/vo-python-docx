@@ -4,15 +4,14 @@
 Step implementations for document settings-related features
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from behave import given, then
+from helpers import test_docx
 
 from docx import Document
 from docx.settings import Settings
-
-from helpers import test_docx
-
 
 # given ====================================================
 

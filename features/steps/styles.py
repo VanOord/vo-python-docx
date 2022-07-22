@@ -5,15 +5,14 @@ Step implementations for styles-related features
 """
 
 from behave import given, then, when
+from helpers import bool_vals, test_docx, tri_state_vals
 
 from docx import Document
 from docx.enum.style import WD_STYLE_TYPE
-from docx.styles.latent import _LatentStyle, LatentStyles
+from docx.styles.latent import LatentStyles, _LatentStyle
 from docx.styles.style import BaseStyle
 from docx.text.font import Font
 from docx.text.parfmt import ParagraphFormat
-
-from helpers import bool_vals, test_docx, tri_state_vals
 
 style_types = {
     "WD_STYLE_TYPE.CHARACTER": WD_STYLE_TYPE.CHARACTER,

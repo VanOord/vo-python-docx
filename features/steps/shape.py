@@ -9,14 +9,12 @@ from __future__ import absolute_import, print_function, unicode_literals
 import hashlib
 
 from behave import given, then, when
+from helpers import test_docx
 
 from docx import Document
 from docx.enum.shape import WD_INLINE_SHAPE
 from docx.shape import InlineShape
 from docx.shared import Inches
-
-from helpers import test_docx
-
 
 # given ===================================================
 

@@ -5,13 +5,11 @@ Step implementations for paragraph-related features
 """
 
 from behave import given, then, when
+from helpers import saved_docx_path, test_docx, test_text
 
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.text.parfmt import ParagraphFormat
-
-from helpers import saved_docx_path, test_docx, test_text
-
 
 # given ===================================================
 

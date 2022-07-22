@@ -10,12 +10,12 @@ import sys
 
 if sys.version_info >= (3, 3):
     from unittest import mock  # noqa
-    from unittest.mock import call, MagicMock  # noqa
-    from unittest.mock import create_autospec, Mock, patch, PropertyMock
+    from unittest.mock import (MagicMock, Mock, PropertyMock, call,  # noqa
+                               create_autospec, patch)
 else:
     import mock  # noqa
-    from mock import ANY, call, MagicMock  # noqa
-    from mock import create_autospec, Mock, patch, PropertyMock
+    from mock import (ANY, MagicMock, Mock, PropertyMock, call,  # noqa
+                      create_autospec, patch)
 
 
 def class_mock(request, q_class_name, autospec=True, **kwargs):

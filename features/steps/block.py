@@ -5,12 +5,10 @@ Step implementations for block content containers
 """
 
 from behave import given, then, when
+from helpers import test_docx
 
 from docx import Document
 from docx.table import Table
-
-from helpers import test_docx
-
 
 # given ===================================================
 

@@ -8,25 +8,12 @@ trees suitable for unit testing.
 
 from __future__ import print_function
 
-from pyparsing import (
-    alphas,
-    alphanums,
-    Combine,
-    dblQuotedString,
-    delimitedList,
-    Forward,
-    Group,
-    Literal,
-    Optional,
-    removeQuotes,
-    stringEnd,
-    Suppress,
-    Word,
-)
+from pyparsing import (Combine, Forward, Group, Literal, Optional, Suppress,
+                       Word, alphanums, alphas, dblQuotedString, delimitedList,
+                       removeQuotes, stringEnd)
 
 from docx.oxml import parse_xml
 from docx.oxml.ns import nsmap
-
 
 # ====================================================================
 # api functions

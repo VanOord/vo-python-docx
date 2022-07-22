@@ -7,14 +7,12 @@ Step implementations for section-related features
 from __future__ import absolute_import, print_function, unicode_literals
 
 from behave import given, then, when
+from helpers import test_docx
 
 from docx import Document
 from docx.enum.section import WD_ORIENT, WD_SECTION
 from docx.section import Section
 from docx.shared import Inches
-
-from helpers import test_docx
-
 
 # given ====================================================
 

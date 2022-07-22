@@ -4,13 +4,14 @@
 Styles object, container for all objects in the styles part.
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 from warnings import warn
 
+from ..shared import ElementProxy
 from . import BabelFish
 from .latent import LatentStyles
-from ..shared import ElementProxy
 from .style import BaseStyle, StyleFactory
 
 

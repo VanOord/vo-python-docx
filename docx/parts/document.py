@@ -4,18 +4,20 @@
 |DocumentPart| and closely related objects
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+from docx.opc.customxml import CustomXML
 
 from ..document import Document
-from .numbering import NumberingPart
 from ..opc.constants import RELATIONSHIP_TYPE as RT
 from ..opc.part import XmlPart
 from ..oxml.shape import CT_Inline
 from ..shape import InlineShapes
 from ..shared import lazyproperty
+from .numbering import NumberingPart
 from .settings import SettingsPart
 from .styles import StylesPart
-from docx.opc.customxml import CustomXML
 
 
 class DocumentPart(XmlPart):

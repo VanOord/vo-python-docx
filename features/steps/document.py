@@ -7,18 +7,16 @@ Step implementations for document-related features
 from __future__ import absolute_import, print_function, unicode_literals
 
 from behave import given, then, when
+from helpers import test_docx, test_file
 
 from docx import Document
 from docx.enum.section import WD_ORIENT, WD_SECTION
+from docx.section import Sections
 from docx.shape import InlineShapes
 from docx.shared import Inches
-from docx.section import Sections
 from docx.styles.styles import Styles
 from docx.table import Table
 from docx.text.paragraph import Paragraph
-
-from helpers import test_docx, test_file
-
 
 # given ===================================================
 

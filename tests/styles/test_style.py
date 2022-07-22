@@ -4,19 +4,14 @@
 Test suite for the docx.styles.style module
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
 
 import pytest
 
 from docx.enum.style import WD_STYLE_TYPE
-from docx.styles.style import (
-    BaseStyle,
-    _CharacterStyle,
-    _ParagraphStyle,
-    _NumberingStyle,
-    StyleFactory,
-    _TableStyle,
-)
+from docx.styles.style import (BaseStyle, StyleFactory, _CharacterStyle,
+                               _NumberingStyle, _ParagraphStyle, _TableStyle)
 from docx.text.font import Font
 from docx.text.parfmt import ParagraphFormat
 

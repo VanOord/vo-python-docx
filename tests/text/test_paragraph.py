@@ -4,7 +4,10 @@
 Test suite for the docx.text.paragraph module
 """
 
-from __future__ import absolute_import, division, print_function, unicode_literals
+from __future__ import (absolute_import, division, print_function,
+                        unicode_literals)
+
+import pytest
 
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.text import WD_ALIGN_PARAGRAPH
@@ -15,10 +18,9 @@ from docx.text.paragraph import Paragraph
 from docx.text.parfmt import ParagraphFormat
 from docx.text.run import Run
 
-import pytest
-
 from ..unitutil.cxml import element, xml
-from ..unitutil.mock import call, class_mock, instance_mock, method_mock, property_mock
+from ..unitutil.mock import (call, class_mock, instance_mock, method_mock,
+                             property_mock)
 
 
 class DescribeParagraph(object):

@@ -1,0 +1,54 @@
+name: Lint-Python
+# https://docs.github.com/en/actions/quickstart
+# https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  "1 5 * * 0" # run at 5:00 UTC on Monday morning
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  # Lint on every commit
+  push:
+    branches-ignore:
+      - main
+jobs:
+  build:
+    name: Lint Python - pypy-3.9 on ubuntu-latest
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the package
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup Python
+    # https://github.com/marketplace/actions/setup-python
+    - name: Setup python
+      uses: actions/setup-python@v3
+      with:
+        python-version: pypy-3.9
+    - name: Print python version
+      run: python --version
+    - name: Update pip
+      run: python -m pip install --upgrade pip
+    
+    # Install linting requirements
+    - name: Install linting requirements
+      run: pip install black[jupyter] flake8 isort mypy pydocstyle
+    - name: Print package list
+      run: pip list
+    
+    # Run linting checks
+    - name: isort
+      run: isort --check-only .
+
+    - name: black
+      run: black --check --diff .
+
+    # - name: flake8
+    #   run: flake8 .
+
+    # - name: pydocstyle
+    #   run: pydocstyle .
+
+    # - name: mypy
+    #   run: mypy .

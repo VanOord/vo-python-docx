@@ -1,0 +1,65 @@
+name: CI
+# https://docs.github.com/en/actions/quickstart
+# https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  "1 5 * * 0" # run at 5:00 UTC on Monday morning
+  pull_request:
+  #  types: [opened, synchronize, reopened] # this is the default setting
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  push:
+    # Rerun the testing on the main brach to create a badge
+    branches:
+      - main
+
+jobs:
+  setup-versions-from-manifest:
+    name: CI - py${{ matrix.python-version }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ["3.9", "3.10"]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    # Setup Python
+    # https://github.com/marketplace/actions/setup-python
+    - name: Setup python
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Print python version
+      run: python --version
+    - name: Update pip
+      run: python -m pip install --upgrade pip
+    - name: Print package list
+      run: pip list
+
+    # Install the package
+    - name: Install package
+      env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: pip install .[test,docs] --index-url=https://$GITHUB_TOKEN:x-oauth-basic@pypi.data.vanoord.com
+    - name: Print package list
+      run: pip list
+
+    # Run the tests
+    - name: Run tests
+      run: pytest
+
+    # Create the docs
+    - name: Create docs
+      run: sphinx-build docs build/docs -W
+
+    # # Upload the artifacts
+    # - name: Upload artifacts
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: Artifacts ${{ matrix.python-version }} - ${{ matrix.os }}
+    #     path: ./
+    #     retention-days: 1

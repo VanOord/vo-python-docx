@@ -1,0 +1,25 @@
+name: Lint-Markdown
+# https://docs.github.com/en/actions/quickstart
+# https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  "1 5 * * 0" # run at 5:00 UTC on Monday morning
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  # Lint on every commit
+  push:
+    branches-ignore:
+      - main
+      - gh-pages
+jobs:
+  # Lint markdown
+  # https://github.com/DavidAnson/markdownlint-cli2-action
+  lint-markdown:
+    name: Lint Markdown
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: DavidAnson/markdownlint-cli2-action@v5
+      with:
+        globs: "**/*.md"

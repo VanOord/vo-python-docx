@@ -113,7 +113,7 @@ class Document(ElementProxy):
         instrText = OxmlElement("w:instrText")
         instrText.set(qn("xml:space"), "preserve")
         # sets attribute on element
-        instrText.text = " REF _Ref{:s} \# 0 \h".format(bookmark)
+        instrText.text = f" REF _Ref{bookmark} \# 0 \h"
         #        instrText.text = ' REF {:s} \h'.format(bookmark)
         fldChar2 = OxmlElement("w:fldChar")
         fldChar2.set(qn("w:fldCharType"), "separate")

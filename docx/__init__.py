@@ -1,12 +1,6 @@
 # encoding: utf-8
 
 from docx.api import Document  # noqa
-
-__version__ = "1.2.0"
-
-
-# register custom Part classes with opc package reader
-
 from docx.opc.constants import CONTENT_TYPE as CT
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.opc.part import PartFactory
@@ -17,6 +11,12 @@ from docx.parts.image import ImagePart
 from docx.parts.numbering import NumberingPart
 from docx.parts.settings import SettingsPart
 from docx.parts.styles import StylesPart
+
+__version__ = "1.2.0"
+
+
+# register custom Part classes with opc package reader
+
 
 
 def part_class_selector(content_type, reltype):

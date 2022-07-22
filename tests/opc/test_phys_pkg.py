@@ -6,11 +6,6 @@ Test suite for docx.opc.phys_pkg module
 
 from __future__ import absolute_import
 
-try:
-    from io import BytesIO  # Python 3
-except ImportError:
-    from StringIO import StringIO as BytesIO
-
 import hashlib
 from zipfile import ZIP_DEFLATED, ZipFile
 
@@ -28,6 +23,15 @@ from docx.opc.phys_pkg import (
 
 from ..unitutil.file import absjoin, test_file_dir
 from ..unitutil.mock import Mock, class_mock, loose_mock
+
+try:
+    from io import BytesIO  # Python 3
+except ImportError:
+    from StringIO import StringIO as BytesIO
+
+
+
+
 
 test_docx_path = absjoin(test_file_dir, "test.docx")
 dir_pkg_path = absjoin(test_file_dir, "expanded_docx")

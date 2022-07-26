@@ -1,5 +1,4 @@
-.. image:: https://travis-ci.org/python-openxml/python-docx.svg?branch=master
-   :target: https://travis-ci.org/python-openxml/python-docx
+# Python-Docx
 
 [![CI](https://github.com/VanOord/python-docx/actions/workflows/action_ci.yml/badge.svg)](https://github.com/VanOord/python-docx/actions/workflows/action_ci.yml)
 [![documentation](https://img.shields.io/badge/sphinx-documentation-brightgreen.svg)](https://vanoord.github.io/python-docx/docs/main)
@@ -11,6 +10,3 @@
 This version of the package is forked to the VanOord organization
 
 More information is available in the `python-docx documentation`_.
-
-.. _`python-docx documentation`:
-   https://python-docx.readthedocs.org/en/latest/

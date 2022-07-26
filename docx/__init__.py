@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 from docx.api import Document  # noqa
-
 from docx.opc.constants import CONTENT_TYPE as CT
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.opc.part import PartFactory

@@ -30,9 +30,6 @@ except ImportError:
     from StringIO import StringIO as BytesIO
 
 
-
-
-
 test_docx_path = absjoin(test_file_dir, "test.docx")
 dir_pkg_path = absjoin(test_file_dir, "expanded_docx")
 zip_pkg_path = test_docx_path

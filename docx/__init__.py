@@ -12,11 +12,10 @@ from docx.parts.numbering import NumberingPart
 from docx.parts.settings import SettingsPart
 from docx.parts.styles import StylesPart
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
 
 
 # register custom Part classes with opc package reader
-
 
 
 def part_class_selector(content_type, reltype):

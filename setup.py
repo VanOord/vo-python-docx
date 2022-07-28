@@ -21,7 +21,7 @@ def text_of(relpath):
 # Read the version from docx.__version__ without importing the package
 # (and thus attempting to import packages it depends on that may not be
 # installed yet)
-version = re.search('__version__ = "([^"]+)"', text_of("docx/__init__.py")).group(1)
+version = re.search(r'__version__ = "([^"]+)"', text_of("docx/__init__.py")).group(1)
 
 
 NAME = "python-docx"
@@ -33,7 +33,7 @@ AUTHOR_EMAIL = "python-docx@googlegroups.com"
 URL = "https://github.com/python-openxml/python-docx"
 LICENSE = text_of("LICENSE")
 PACKAGES = find_packages(exclude=["tests", "tests.*"])
-PACKAGE_DATA = {"docx": ["templates/*"]}
+PACKAGE_DATA = {"docx": ["templates/*.xml", "templates/*.docx"]}
 
 INSTALL_REQUIRES = ["lxml>=2.3.2"]
 TEST_SUITE = "tests"
@@ -58,6 +58,7 @@ CLASSIFIERS = [
 
 LONG_DESCRIPTION = text_of("README.rst") + "\n\n" + text_of("HISTORY.rst")
 
+ZIP_SAFE = False
 
 params = {
     "name": NAME,
@@ -75,6 +76,7 @@ params = {
     "tests_require": TESTS_REQUIRE,
     "test_suite": TEST_SUITE,
     "classifiers": CLASSIFIERS,
+    "zip_safe": ZIP_SAFE,
 }
 
 setup(**params)

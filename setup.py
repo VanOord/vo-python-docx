@@ -24,7 +24,7 @@ def text_of(relpath):
 version = re.search(r'__version__ = "([^"]+)"', text_of("docx/__init__.py")).group(1)
 
 
-NAME = "python-docx"
+NAME = "vo-python-docx"
 VERSION = version
 DESCRIPTION = "Create and update Microsoft Word .docx files."
 KEYWORDS = "docx office openxml word"

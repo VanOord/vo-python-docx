@@ -1,0 +1,50 @@
+name: CI
+# Event triggers for github workflow
+on:
+  schedule:
+    - cron:  "1 5 * * 0" # run at 5:00 UTC on Monday morning
+  pull_request:
+  #  types: [opened, synchronize, reopened] # this is the default setting
+  # workflow_dispatch allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  push:
+    # Rerun the testing on the main brach to create a badge
+    branches:
+      - main
+
+env:
+  # Run all pip install's from Van Oord PyPi
+  PIP_INDEX_URL: ${{ secrets.ADO_PYPI_DOWNLOAD_URL }}
+
+jobs:
+  # Job to test building the package for deployment
+  test_deployment:
+    name: Test Deployment
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout the package
+    - name: Checkout current branch from GitHub
+      uses: actions/checkout@v3
+
+    # Setup Python
+    - name: Setup python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    # Upgrade pip
+    - run: python -m pip install --upgrade pip
+
+    # Install build tools
+    - run: pip install --upgrade build
+    # Build the package
+    - run: python -m build
+
+    # Show the dist folder
+    - run: ls ./dist
+    # Save the whole dist folder as artifact
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: Deployment files
+        path: ./dist
+        retention-days: 1

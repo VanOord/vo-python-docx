@@ -30,7 +30,7 @@ DESCRIPTION = "Create and update Microsoft Word .docx files."
 KEYWORDS = "docx office openxml word"
 AUTHOR = "Steve Canny"
 AUTHOR_EMAIL = "python-docx@googlegroups.com"
-URL = "https://github.com/python-openxml/python-docx"
+URL = "https://github.com/VanOord/vo-python-docx"
 LICENSE = text_of("LICENSE")
 PACKAGES = find_packages(exclude=["tests", "tests.*"])
 PACKAGE_DATA = {"docx": ["templates/*.xml", "templates/*.docx"]}

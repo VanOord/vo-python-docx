@@ -4,9 +4,9 @@ on:
   release:
     types: [released] # only run it on released. Otherwise it is triggered 3 times.
 
-env:
-  # Run all pip install's from Van Oord PyPi
-  PIP_INDEX_URL: ${{ secrets.ADO_PYPI_DOWNLOAD_URL }}
+# env:
+#   # Run all pip install's from Van Oord PyPi
+#   PIP_INDEX_URL: ${{ secrets.ADO_PYPI_DOWNLOAD_URL }}
 
 jobs:
   build:
@@ -34,4 +34,4 @@ jobs:
     - name: Update packages to support upload
       run: python -m pip install --upgrade twine keyring
     - name: Upload package to the AzureDevOps artifacts
-      run: twine upload --repository-url ${{ secrets.ADO_PYPI_UPLOAD_URL }} -u '${{ secrets.ADO_PYPI_UPLOAD_ACC }}' -p ${{ secrets.ADO_PYPI_UPLOAD_PAT }} dist/* --verbose
+      run: twine upload --repository-url ${{ secrets.ADO_PYPI_UPLOAD_URL }} -u '${{ secrets.ADO_PUBLIC_SERVICEACCOUNT }}' -p ${{ secrets.ADO_PUBLIC_SERVICEACCOUNT_PASSWORD }} dist/* --verbose
